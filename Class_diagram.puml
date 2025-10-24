@@ -1,0 +1,112 @@
+@startuml Class_diagram
+Person <|-- Player
+
+
+'Definition of the person class
+
+abstract class  Person {
+    # First name : string
+    # Last name : string 
+    # Date of birth : string
+
+}
+
+
+'Definition of the player class
+class Player {  
+    + Elo : int
+    + Player_id : string
+
+    + change_elo() : void
+}
+
+class Backup {
+    SavePlayer() : void
+    SaveGame() : void
+}
+
+Class Elo_calculator {
+
+    - Player : Player
+    - GameState : Bool
+
+}
+
+Class Registration {
+
+
+}
+
+Class Game {
+    - Turn : Bool
+    - Player1_ID : int
+    - Player2_ID : int
+    - Moves : List<string>
+
+    + SetMove (Move:string) : void
+    + RemoveLastMove() : void
+
+}
+
+Class Competition{
+    - Name : string
+    - Location : string
+    - Date : string
+    - GameList : List<Game>
+    - PlayerList : Dictionary<Player, int>
+
+
+    - AddGame(Game : Game)
+    - AddPlayer(Player : Player)
+
+
+
+}
+
+
+package "History" {
+
+    
+    package "Players" as Playerfolder{
+
+    json "Player Data" as PlayerData {
+        "First Name" : "",
+        "Last Name": "",
+        "Player id": "" ,
+        "Date of Birth" :"" ,
+        "Registration date" :"" ,
+        "elo" : "",
+        "Previous Games" : "" 
+
+    }
+
+    Backup::SavePlayer ..> PlayerData
+
+    }
+
+    package "Competitions" as CompetitionFolder  {
+
+        artifact "Ranking.txt" <<Ranking>>{
+
+        }
+        package Games as Gamefolder {
+        json "Game Data" as Gamedata {
+            "Player 1" : "",
+            "Player 2" : "",
+            "Winner" : "",
+            "Moves" : ""
+        }
+        }
+        Backup::SaveGame ..> Gamedata
+    }
+
+}
+
+/'
+person
+player
+Admin 
+compet 
+match
+'/
+@enduml
