@@ -1,9 +1,16 @@
 @startuml Class_diagram
-Person <|-- Player
+
+
+Person <|-up- Player
+Player::Elo <-up- Elo_calculator
+Competition -left-* Game
+Backup::SaveCompetition -up-> Competition
+Backup::SavePlayer -left-> Player
+Game::Winner <-left- Elo_calculator
+
 
 
 'Definition of the person class
-
 abstract class  Person {
     # First name : string
     # Last name : string 
@@ -20,11 +27,16 @@ class Player {
     + change_elo() : void
 }
 
+
+'Definition the the Backup class
 class Backup {
     SavePlayer() : void
-    SaveGame() : void
+    SaveCompetition() : void
 }
 
+
+
+'Definition the the Elo calculator class
 Class Elo_calculator {
 
     - Player : Player
@@ -32,22 +44,25 @@ Class Elo_calculator {
 
 }
 
-Class Registration {
 
 
-}
 
+'Definition the the Game class
 Class Game {
     - Turn : Bool
     - Player1_ID : int
     - Player2_ID : int
     - Moves : List<string>
+    - Winner : int | null
 
     + SetMove (Move:string) : void
     + RemoveLastMove() : void
 
 }
 
+
+
+'Definition the the Competition class
 Class Competition{
     - Name : string
     - Location : string
@@ -56,20 +71,19 @@ Class Competition{
     - PlayerList : Dictionary<Player, int>
 
 
-    - AddGame(Game : Game)
     - AddPlayer(Player : Player)
 
 
 
 }
 
-
-package "History" {
+'Definition the the History package
+package "History"  #746f6fdd {
 
     
-    package "Players" as Playerfolder{
+    package "Players" as Playerfolder #cdcbcbdd{
 
-    json "Player Data" as PlayerData {
+    json "Player Data" as PlayerData #eeebebdd{
         "First Name" : "",
         "Last Name": "",
         "Player id": "" ,
@@ -80,26 +94,33 @@ package "History" {
 
     }
 
-    Backup::SavePlayer ..> PlayerData
+
+'HERE IS A RELATIONNNNN-----------------------------------------
+    Backup::SavePlayer --> PlayerData
 
     }
 
-    package "Competitions" as CompetitionFolder  {
+    package "Competitions" as CompetitionFolder #cdcbcbdd {
 
-        artifact "Ranking.txt" <<Ranking>>{
+        artifact "Ranking.txt" <<Ranking>> #eeebebdd{
 
         }
-        package Games as Gamefolder {
-        json "Game Data" as Gamedata {
+        package Games as Gamefolder #eeebebdd {
+        json "Game Data" as Gamedata  {
             "Player 1" : "",
             "Player 2" : "",
             "Winner" : "",
             "Moves" : ""
         }
         }
-        Backup::SaveGame ..> Gamedata
+        
+        
     }
 
+
+'HERE IS A RELATIONNNNN-----------------------------------------
+
+    Backup::SaveCompetition --> CompetitionFolder
 }
 
 /'
