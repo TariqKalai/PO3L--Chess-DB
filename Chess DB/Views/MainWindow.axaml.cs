@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Chess_DB.Controls;
 using Avalonia.Interactivity;
+using Chess_DB.Services;
 
 namespace Chess_DB.Views;
 
@@ -10,6 +11,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        NavigationService.PageHost = PageHost;
 
         PageHost.Content = new HomeMenu();
     }
