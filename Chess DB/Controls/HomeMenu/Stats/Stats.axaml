@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            x:Class="Chess_DB.Home_actions.Stats">
+
+    <Border Background="#ffffffff"
+            CornerRadius="12"
+            Padding="16"
+            BorderBrush="#000000ff"
+            BorderThickness="18">
+
+        <Grid ColumnDefinitions="50*, 50*" RowDefinitions="Auto, Auto" Margin="10" ShowGridLines="True">
+
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Total Player :" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="133" FontSize="28" FontWeight="Light"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="Average Elo :" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="1230" FontSize="28" FontWeight="Light"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <TextBlock Text="Last Backup :" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="11/11/2025 11:11:11" FontSize="28" FontWeight="Light"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="Current Competitions :" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="White fort" FontSize="28" FontWeight="Light"/>
+                <TextBlock Text="black fort" FontSize="28" FontWeight="Light"/>
+
+            </StackPanel>
+
+        </Grid>
+
+
+    </Border>
+
+</UserControl>

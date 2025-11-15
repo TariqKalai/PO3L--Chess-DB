@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            x:Class="Chess_DB.Home_actions.QuickActions"
+>
+
+<UserControl.Styles >
+
+    <Style Selector="Button">
+        <Setter Property="HorizontalAlignment"  Value="Stretch"  />
+        <Setter Property="VerticalAlignment"  Value="Stretch"  />
+        <Setter Property="CornerRadius"  Value="10"  />
+        <Setter Property="Background" Value="Seagreen"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
+        <Setter Property="Margin" Value="6"/>
+        
+        <Setter Property="BorderBrush" Value="Transparent"/>
+
+    
+    </Style>
+
+    <Style Selector="Button:pointerover">
+        
+        <Setter Property="Background" Value="Darkgreen"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+    </Style>
+
+    <Style Selector="Button:pressed">
+
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+    </Style>
+
+</UserControl.Styles>
+
+<Border Background="#ffffffff"
+            CornerRadius="12"
+            Padding="16"
+            BorderBrush="#000000ff"
+            BorderThickness="1">
+
+        <Grid 
+            ColumnDefinitions="50*, 50*" 
+            RowDefinitions="80, 80" 
+            Margin="5" 
+            ShowGridLines="True"
+            >
+
+
+            <Button Content="Add Player" Grid.Column="0" Grid.Row="0" />
+            <Button Content="New Competition" Grid.Column="1" Grid.Row="0"/>
+            <Button Content="Backup Data" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="Register Player" Grid.Column="0" Grid.Row="1"/>
+
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

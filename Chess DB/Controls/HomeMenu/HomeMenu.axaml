@@ -4,10 +4,35 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Chess_DB.Controls.HomeMenu"
+    xmlns:local="clr-namespace:Chess_DB.Home_actions"
     >
 
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-    <TextBlock Text="Bienvenue sur la page d'accueil"
-               Margin="20" />
+        <Grid ShowGridLines="True">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>   <!-- Header -->
+                <RowDefinition Height="Auto"/>   <!-- Stats -->
+                <RowDefinition Height="Auto"/>   <!-- Quick actions -->
+            
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Home" 
+                   FontSize="28" 
+                   FontWeight="Bold"/>
+
+            <!-- Stats -->
+            <local:Stats Grid.Row="1"/>
+
+            <!-- Quick Actions -->
+            <local:QuickActions Grid.Row="2"/>
+
+
+
+        </Grid>
+
+
+    </ScrollViewer>
 
 </UserControl>
