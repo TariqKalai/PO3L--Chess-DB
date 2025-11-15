@@ -11,5 +11,10 @@
   
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="Button.menuBtn">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
     </Application.Styles>
 </Application>

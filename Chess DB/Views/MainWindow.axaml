@@ -7,43 +7,31 @@
         x:Class="Chess_DB.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Chess_DB">
+        Title="Chess_DB"
+        xmlns:controls="clr-namespace:Chess_DB.Controls"
+        >
+        
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
 
-     <Grid RowDefinitions="Auto, *, Auto"
-          x:Name="Root">
+        
+    <TabControl>
 
-        <!-- This is our title text block.  -->
-        <TextBlock Text="Chess DB" />
+        <TabItem Header="Accueil">
+            <TextBlock Text="Bienvenue sur l’onglet Accueil" Margin="10"/>
+        </TabItem>
 
-        <ScrollViewer Grid.Row="1">
-            <!-- This ItemsControl show all added ToDoItems. -->
-            <!-- It needs to be placed inside a ScrollViewer because other than a ListBox it has not its own -->
-            <ItemsControl ItemsSource="{Binding Players}">
-            </ItemsControl>
-        </ScrollViewer>
+        <TabItem Header="Players">
+            <controls:PlayerMenu />
+        </TabItem>
 
-        <!-- This TextBox can be used to add new ToDoItems -->
-        <TextBox Grid.Row="2"
-                 Text="{Binding NewPlayerName}"
-                 Watermark="Add a new Player">
-                 <TextBox.InnerRightContent>
-                     <Button Command="{Binding AddPlayer}" >
-                         Add
-                         <!-- <PathIcon Data="{DynamicResource AcceptIconData}" Foreground="Green" /> -->
-                     </Button>
-                 </TextBox.InnerRightContent>
-                 <!--  KeyBindings allow us to define keyboard gestures  -->
-                 <TextBox.KeyBindings>
-                     <KeyBinding Command="{Binding AddPlayer}" Gesture="Enter" />
-                 </TextBox.KeyBindings>
-        </TextBox>
-    </Grid>
+        <TabItem Header="Tournament">
+            <controls:TournamentMenu/>
+        </TabItem>
+
+        <TabItem Header="Ranking">
+            <TextBlock Text="elo" Margin="10"/>
+        </TabItem>
+    </TabControl>
 
 
 

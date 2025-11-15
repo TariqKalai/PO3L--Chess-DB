@@ -1,0 +1,17 @@
+
+
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.TournamentMenu"
+    >
+
+    <StackPanel>
+        <Button Classes ="menuBtn"  Content ="New Tournament"/>
+        <Button Classes ="menuBtn" Content = "Modify Tournament"/>
+        <Button Classes ="menuBtn" Content = "Delete/Archive Tournament"/>
+        <Button Classes ="menuBtn" Content = "Manage Registrations"/>
+        <Button Classes ="menuBtn" Content = "View Tournaments"/>
+    </StackPanel>
+
+</UserControl>
