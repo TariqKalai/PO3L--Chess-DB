@@ -14,24 +14,21 @@
 
 
         
-    <TabControl>
+    <DockPanel >
 
-        <TabItem Header="Accueil">
-            <TextBlock Text="Bienvenue sur l’onglet Accueil" Margin="10"/>
-        </TabItem>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="30"  Background="#1a6440ff">
 
-        <TabItem Header="Players">
-            <controls:PlayerMenu />
-        </TabItem>
 
-        <TabItem Header="Tournament">
-            <controls:TournamentMenu/>
-        </TabItem>
+            <Button Classes="menuBtn" Content="Home"       Click="GoHome"/>
+            <Button Classes="menuBtn" Content="Players"    Click="GoPlayers"/>
+            <Button Classes="menuBtn" Content="Tournament" Click="GoTournament"/>
+            <Button Classes="menuBtn" Content="Ranking"    Click="GoRanking"/>
 
-        <TabItem Header="Ranking">
-            <TextBlock Text="elo" Margin="10"/>
-        </TabItem>
-    </TabControl>
+        </StackPanel>
+
+        <ContentControl x:Name="PageHost"/>
+
+    </DockPanel>
 
 
 
