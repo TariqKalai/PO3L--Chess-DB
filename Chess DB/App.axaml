@@ -16,5 +16,19 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
+
+        <Style Selector="Button.NavBtn">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+        </Style>
+
+        <Style Selector="Button.NavBtn:Pressed">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="AliceBlue"/>
+        </Style>
     </Application.Styles>
 </Application>

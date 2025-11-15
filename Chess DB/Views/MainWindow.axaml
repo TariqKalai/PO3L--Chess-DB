@@ -16,13 +16,13 @@
         
     <DockPanel >
 
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="30"  Background="#1a6440ff">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="30"  Background="#1b4332">
 
 
-            <Button Classes="menuBtn" Content="Home"       Click="GoHome"/>
-            <Button Classes="menuBtn" Content="Players"    Click="GoPlayers"/>
-            <Button Classes="menuBtn" Content="Tournament" Click="GoTournament"/>
-            <Button Classes="menuBtn" Content="Ranking"    Click="GoRanking"/>
+            <Button Classes="NavBtn" Content="Home"       Click="GoHome"/>
+            <Button Classes="NavBtn" Content="Players"    Click="GoPlayers"/>
+            <Button Classes="NavBtn" Content="Tournament" Click="GoTournament"/>
+            <Button Classes="NavBtn" Content="Ranking"    Click="GoRanking"/>
 
         </StackPanel>
 
