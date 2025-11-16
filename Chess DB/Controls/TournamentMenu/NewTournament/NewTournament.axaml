@@ -1,0 +1,89 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.NewTournament"
+    >
+
+    <UserControl.Styles>
+    
+        <Style Selector="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Spacing" Value="15"/>
+            <!-- <Setter Property="Height" Value="30"/>  -->
+
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    
+    </UserControl.Styles>
+
+    
+    <StackPanel Orientation="Vertical" Spacing="10">
+
+    <StackPanel>
+        <TextBlock Text="Competition Name"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Location"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Start Date"/>
+        <DatePicker />
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="End Date"/>
+        <DatePicker  />
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Competition Type"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Time Control"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Maximum Number of Players"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Description"/>
+        <TextBox/>
+    </StackPanel>
+
+
+    <StackPanel >
+        <TextBlock Text="Entry Fee"/>
+        <TextBox/>
+    </StackPanel>
+
+    <StackPanel >
+        <TextBlock Text="Prize Pool"/>
+        <TextBox/>
+    </StackPanel>
+
+
+
+
+    </StackPanel>
+
+
+
+
+</UserControl>

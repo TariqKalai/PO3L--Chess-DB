@@ -6,9 +6,9 @@ using Avalonia.Interactivity;
 
 namespace Chess_DB.Controls
 {
-    public partial class PlayerMenu : UserControl
+    public partial class NewTournament : UserControl
     {
-        public PlayerMenu()
+        public NewTournament()
         {
             InitializeComponent();
 
@@ -19,10 +19,6 @@ namespace Chess_DB.Controls
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void GoAddPlayer(object? sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AddPlayer());
-        }
 
     }
 }
