@@ -10,7 +10,7 @@ public partial class Player : Person
 
     [ObservableProperty]
     private int _player_id;
-    public Player() 
+    public Player()
     {
         ID_incrementation += 1;
 
@@ -23,6 +23,6 @@ public partial class Player : Person
     public void Change_elo(int new_elo)
     {
         Elo = new_elo;
-    } 
+    }
 
 }

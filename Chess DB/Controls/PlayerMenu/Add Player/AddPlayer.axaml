@@ -41,7 +41,7 @@
 
 
 
-    <TextBlock Text="Birthday" Grid.Row="5" Grid.Column="1"/>
+    <TextBlock Text="Date of birth" Grid.Row="5" Grid.Column="1"/>
     <DatePicker                Grid.Row="5"  Grid.Column="2" CornerRadius="8"/>
 
 

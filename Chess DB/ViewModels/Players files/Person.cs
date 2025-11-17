@@ -12,7 +12,21 @@ public abstract partial class Person : ViewModelBase
 
     [ObservableProperty]
     private string? _dateOfBirth;
+
+
+    [ObservableProperty]
+
+    private string? _Email;
+
+    [ObservableProperty]
+
+    private string? _phone;
+
+
     public Person()
     {
     }
+
+
+
 }

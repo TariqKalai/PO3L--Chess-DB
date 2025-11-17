@@ -1,38 +1,30 @@
 ﻿namespace Chess_DB.ViewModels;
+
 using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using Chess_DB.Services;
 using CommunityToolkit.Mvvm.Input;
+using System.IO;
 
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public ObservableCollection<Player> Players { get; } = new ObservableCollection<Player>();
+    public ObservableCollection<Player> Players { get; set; } = new ObservableCollection<Player>();
 
-    [ObservableProperty]
-    // This attribute tells the MVVM Toolkit to re-run CanAddPlayer() 
-    // every time the value of _newPlayerName changes.
-    [NotifyCanExecuteChangedFor(nameof(AddPlayerCommand))]
-    private string? _newPlayerName;
 
-    [RelayCommand(CanExecute = nameof(CanAddPlayer))]
-    private void AddPlayer()
+    private readonly FileService _fileService;
+
+    public MainWindowViewModel()
     {
-        // Add a new item to the list
-        Players.Add(new Player()
-        {
-            First_name = NewPlayerName,
-            Last_name = NewPlayerName,
-            DateOfBirth = NewPlayerName
-        });
-        // reset the NewItemContent
-        NewPlayerName = null;
+
+        _fileService = new FileService();
+
+        var loadedPlayers = _fileService.Jsonload();
+        Players = new ObservableCollection<Player>(loadedPlayers);
+
     }
-    private bool CanAddPlayer() => !string.IsNullOrWhiteSpace(NewPlayerName);
-
-
-    
 
 
 }
