@@ -24,4 +24,9 @@ public partial class Player : Person
         Elo = new_elo;
     }
 
+    public override string ToString()
+    {
+        return $"Player ID {Player_id}: {FirstName} {LastName} (ELO {Elo})";
+    }
+
 }

@@ -9,6 +9,8 @@ namespace Chess_DB.Services;
 public class PlayerService
 {
     private readonly FileService _fileService = new();
+    public string loaded;
+
 
     public ObservableCollection<Player> Players { get; }
 
@@ -20,6 +22,8 @@ public class PlayerService
 
     public void Save()
     {
+
+        Console.WriteLine("I WAS HERE");
         _fileService.SavePlayers(Players);
     }
 }

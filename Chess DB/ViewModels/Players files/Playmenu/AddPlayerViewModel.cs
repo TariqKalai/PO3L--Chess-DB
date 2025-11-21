@@ -6,6 +6,7 @@ using System;
 using Chess_DB.Services;
 using CommunityToolkit.Mvvm.Input;
 
+using System.Collections.ObjectModel;
 public partial class AddPlayerViewModel : ViewModelBase
 {
     public AddPlayerViewModel()
@@ -23,11 +24,6 @@ public partial class AddPlayerViewModel : ViewModelBase
         AppServices.PlayerService.Players.Add(player);
         AppServices.PlayerService.Save();
 
-        Console.WriteLine(Form.FirstName);
-        Console.WriteLine(Form.LastName);
-        Console.WriteLine(Form.DateOfBirth);
-        Console.WriteLine(Form.Phone);
-        Console.WriteLine(Form.Elo);
-        Console.WriteLine(Form.Email);
+
     }
 }
