@@ -4,6 +4,8 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Chess_DB.Controls.AddPlayer"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:AddPlayerViewModel"
     >
 
     <UserControl.Styles>
@@ -32,31 +34,35 @@
     <Grid RowDefinitions="10*, Auto,5*,Auto,5*,Auto,5*,Auto,5*,Auto,5*,Auto, 10*" ColumnDefinitions="10*, 150,297, 10*" Margin="10"  >
 
     <TextBlock Text="First Name" Grid.Row="1" Grid.Column="1"/>
-    <TextBox                     Grid.Row="1" Grid.Column="2"/>
+    <TextBox    Text="{Binding Form.FirstName}" Grid.Row="1" Grid.Column="2"/>
 
 
 
     <TextBlock Text="Last Name" Grid.Row="3" Grid.Column="1"/>
-    <TextBox                    Grid.Row="3" Grid.Column="2"/>
+    <TextBox  Text="{Binding Form.LastName}" Grid.Row="3" Grid.Column="2"/>
 
 
 
     <TextBlock Text="Date of birth" Grid.Row="5" Grid.Column="1"/>
-    <DatePicker                Grid.Row="5"  Grid.Column="2" CornerRadius="8"/>
+    <DatePicker SelectedDate="{Binding Form.DateOfBirth}"   Grid.Row="5"  Grid.Column="2" CornerRadius="8"/>
 
 
 
     <TextBlock Text="Elo" Grid.Row="7" Grid.Column="1"/>
-    <TextBox              Grid.Row="7"  Grid.Column="2"/>
+    <TextBox  Text="{Binding Form.Elo}"  Grid.Row="7"  Grid.Column="2"/>
 
 
 
     <TextBlock Text="Email" Grid.Row="9" Grid.Column="1"/>
-    <TextBox                Grid.Row="9"  Grid.Column="2"/>
+    <TextBox  Text="{Binding Form.Email}"  Grid.Row="9"  Grid.Column="2"/>
 
 
     <TextBlock Text="Phone Number" Grid.Row="11 " Grid.Column="1"/>
-    <TextBox                       Grid.Row="11 "  Grid.Column="2"/>
+    <TextBox  Text="{Binding Form.Phone}"  Grid.Row="11 "  Grid.Column="2"/>
+
+    <Button Content="Submit"                    Grid.Row="5" Grid.Column="3"
+            Background="ForestGreen" Foreground="White" HorizontalAlignment="Center"
+            Command="{Binding SubmitCommand}"/>
 
 
 

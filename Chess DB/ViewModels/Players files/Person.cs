@@ -4,28 +4,22 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 public abstract partial class Person : ViewModelBase
 {
-    [ObservableProperty]
-    private string? _first_name;
-
-    [ObservableProperty]
-    private string? _last_name;
-
-    [ObservableProperty]
-    private string? _dateOfBirth;
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string DateOfBirth { get; set; }
+    public string Mail { get; set; }
+    public string Phone { get; set; }
 
 
-    [ObservableProperty]
-
-    private string? _Email;
-
-    [ObservableProperty]
-
-    private string? _phone;
-
-
-    public Person()
+    public Person(string firstName, string lastName, string dateOfBirth, string mail, string phone)
     {
+        FirstName = firstName;
+        LastName = lastName;
+        DateOfBirth = dateOfBirth;
+        Mail = mail;
+        Phone = phone;
     }
+
 
 
 

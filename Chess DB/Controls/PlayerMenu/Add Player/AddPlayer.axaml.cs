@@ -1,8 +1,13 @@
 
+using System.Security;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Chess_DB.ViewModels;
 using Chess_DB.Services;
-using Avalonia.Interactivity;
+using CommunityToolkit.Mvvm.Input;
+using System;
+
+
 
 namespace Chess_DB.Controls
 {
@@ -11,6 +16,7 @@ namespace Chess_DB.Controls
         public AddPlayer()
         {
             InitializeComponent();
+            DataContext = new AddPlayerViewModel();
 
         }
 
@@ -18,6 +24,8 @@ namespace Chess_DB.Controls
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+
 
 
     }

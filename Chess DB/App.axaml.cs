@@ -6,11 +6,15 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Chess_DB.ViewModels;
 using Chess_DB.Views;
+using Chess_DB.Services;
 
 namespace Chess_DB;
 
 public partial class App : Application
+
+
 {
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -25,7 +29,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainWindowViewModel(AppServices.PlayerService)
             };
         }
 

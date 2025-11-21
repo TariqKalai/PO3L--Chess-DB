@@ -11,18 +11,15 @@ using System.IO;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public ObservableCollection<Player> Players { get; set; } = new ObservableCollection<Player>();
+    public PlayerService PlayerService { get; }
+
+    public ObservableCollection<Player> Players => PlayerService.Players;
 
 
-    private readonly FileService _fileService;
-
-    public MainWindowViewModel()
+    public MainWindowViewModel(PlayerService playerService)
     {
 
-        _fileService = new FileService();
-
-        var loadedPlayers = _fileService.Jsonload();
-        Players = new ObservableCollection<Player>(loadedPlayers);
+        PlayerService = playerService;
 
     }
 

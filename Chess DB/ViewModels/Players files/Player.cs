@@ -3,19 +3,18 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 public partial class Player : Person
 {
-    [ObservableProperty]
-    private int? _elo;
+    public int Elo { get; set; }
 
     private static int ID_incrementation = 0;
 
-    [ObservableProperty]
-    private int _player_id;
-    public Player()
+    public int Player_id { get; set; }
+    public Player(int elo, string firstName, string lastName, string dateOfBirth, string mail, string phone) :
+     base(firstName, lastName, mail, phone, dateOfBirth)
     {
         ID_incrementation += 1;
 
         Player_id = ID_incrementation;
-
+        Elo = elo;
         Console.WriteLine(String.Format("Player id {0} has been given", Player_id));
     }
 
