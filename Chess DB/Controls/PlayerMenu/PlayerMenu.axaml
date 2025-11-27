@@ -9,7 +9,7 @@
 
     <StackPanel>
         <Button Classes ="menuBtn"  Content = "Add Player"  Click="GoAddPlayer"/>
-        <Button Classes ="menuBtn" Content = "Modify Player" />
+        <Button Classes ="menuBtn" Content = "Edit Player" Click="GoEditPlayer" />
         <Button Classes ="menuBtn" Content = "Delete/archive Player" />
         <Button Classes ="menuBtn" Content = "Search Player" />
         <Button Classes ="menuBtn" Content = "Export Player list" />

@@ -24,5 +24,9 @@ namespace Chess_DB.Controls
             NavigationService.Navigate(new AddPlayer());
         }
 
+        private void GoEditPlayer(object? sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditPlayer());
+        }
     }
 }
