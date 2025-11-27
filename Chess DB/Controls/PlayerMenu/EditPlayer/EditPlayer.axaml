@@ -30,13 +30,15 @@
     
     </UserControl.Styles>
     
-    <Grid ColumnDefinitions="*,auto" RowDefinitions="*, auto">
+    <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
         <TextBlock Text="List rendered as StackPanel of Buttons:" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
         <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
         by generating a separate visual container for each item in that collection each one can
         be selected and then chosen to make something out of it. -->
         <ScrollViewer Grid.Column="0" Grid.Row="1">
-            <ListBox ItemsSource="{Binding List_player}" >
+            <ListBox ItemsSource="{Binding List_player}" 
+                     SelectedItem="{Binding SelectedPlayer}"
+                     SelectionMode="Single">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" Spacing="2" />
@@ -56,8 +58,8 @@
         <StackPanel Orientation="Vertical" 
         Grid.Column="1" Grid.Row="1"
         HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Modify" Margin="0,0,0,5"/> 
-            <Button Content="Delete" /> 
+            <Button Content="Modify" Margin="0,0,0,5" Command="{Binding ModifyPlayerCommand}"/> 
+            <Button Content="Delete" Command="{Binding DeletePlayerCommand}"/> 
         </StackPanel>
     </Grid>
 

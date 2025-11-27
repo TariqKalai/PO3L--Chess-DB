@@ -25,6 +25,12 @@ public class PlayerService
     {
 
         Console.WriteLine("I WAS HERE");
+
+        // Debug Commands
+        // foreach (var playel in Players)
+        // {
+        //     Console.WriteLine(playel.FirstName, playel.Player_id);
+        // }
         _fileService.SavePlayers(Players);
     }
 }
