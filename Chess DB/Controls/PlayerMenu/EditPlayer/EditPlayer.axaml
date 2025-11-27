@@ -17,7 +17,15 @@
 
         </Style>
 
-        <Style Sele
+        <Style Selector="Button">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
     
     
     </UserControl.Styles>
