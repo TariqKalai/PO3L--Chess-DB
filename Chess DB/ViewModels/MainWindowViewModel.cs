@@ -11,14 +11,14 @@ using System.IO;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public PlayerService PlayerService { get; }
+    public PlayerService PlayerService; //{get; }
 
     public ObservableCollection<Player> Players => PlayerService.Players;
 
 
     public MainWindowViewModel(PlayerService playerService)
     {
-
+        // Player service initialization
         PlayerService = playerService;
 
     }

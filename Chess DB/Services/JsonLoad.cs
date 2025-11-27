@@ -9,6 +9,8 @@ namespace Chess_DB.Services;
 
 public class FileService
 {
+
+    //FILEPATH 
     public readonly string filePath =
     Path.Combine(AppContext.BaseDirectory, "Data", "players.json");
 
@@ -20,16 +22,18 @@ public class FileService
         try
         {
             // Ensure folder exists
+
             string dir = Path.GetDirectoryName(filePath)!;
-            Console.WriteLine(dir);
 
-
+            //creates folder if it does not exist
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+            {
 
                 Console.WriteLine("dir not existant");
-            Directory.CreateDirectory(dir);
+                Directory.CreateDirectory(dir);
+            }
 
-
+            //creates file if it does not exist
             if (!File.Exists(filePath))
             {
                 var empty = new ObservableCollection<Player>();
@@ -38,14 +42,15 @@ public class FileService
                 return empty;
             }
 
+            //gets the raw text of the filepath
             string json = File.ReadAllText(filePath);
-            Console.WriteLine("HEREEEEE first", json);
-            Console.WriteLine("MAYBE HEREE", JsonSerializer.Deserialize<ObservableCollection<Player>>(json));
 
+            //returns it in form of an Observable collection
             return JsonSerializer.Deserialize<ObservableCollection<Player>>(json) ?? new ObservableCollection<Player>();
         }
 
 
+        //If json error then juste create a new json
         catch (JsonException)
         {
             var empty = new ObservableCollection<Player>();
@@ -54,19 +59,13 @@ public class FileService
         }
     }
 
+
+    //SAVE PLAYERs inside the json (serialize and write)
     public void SavePlayers(ObservableCollection<Player> players)
 
     {
 
-        foreach (var playegr in players)
-        {
-            Console.WriteLine(playegr);
-        }
-
         string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
-
         File.WriteAllText(filePath, json);
-        Console.WriteLine(json);
-        Console.WriteLine(filePath);
     }
 }

@@ -5,6 +5,7 @@ using Chess_DB.Services;
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+//PlayerViewModel of the Player class
 public partial class PlayerViewModel : ViewModelBase
 {
     [ObservableProperty] private string? _firstName;

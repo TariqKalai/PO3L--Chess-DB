@@ -12,14 +12,15 @@ public class PlayerService
     public string loaded;
 
 
-    public ObservableCollection<Player> Players { get; }
+    public ObservableCollection<Player> Players;//{get;}
 
     public PlayerService()
-    {
+    {   // LOAD Json file and loads all of it in the PLayers observable collection
         var loaded = _fileService.Jsonload();
         Players = new ObservableCollection<Player>(loaded);
     }
 
+    //just calls fileservice to save the current player list in the json file
     public void Save()
     {
 
