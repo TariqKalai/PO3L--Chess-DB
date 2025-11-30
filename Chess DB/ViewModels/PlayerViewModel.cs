@@ -23,6 +23,14 @@ public partial class PlayerViewModel : ViewModelBase
 
     public Player SubmitPlayer()
     {
+
+        Console.WriteLine(String.Format("First Name is {0}", FirstName));
+        Console.WriteLine(String.Format("Last Name is {0}", LastName));
+        Console.WriteLine(String.Format("Elo is {0}", Elo));
+        Console.WriteLine(String.Format("DateofBirth is {0}", DateOfBirth));
+        Console.WriteLine(String.Format("mail  is {0}", Email));
+        Console.WriteLine(String.Format("Phone is {0}", Phone));
+
         if (string.IsNullOrWhiteSpace(FirstName))
             throw new Exception("First name cannot be empty.");
 
@@ -38,14 +46,9 @@ public partial class PlayerViewModel : ViewModelBase
         if (string.IsNullOrWhiteSpace(Phone))
             throw new Exception("Phone cannot be empty.");
 
-        return new Player(
-            Elo,
-            FirstName!,
-            LastName!,
-            DateOfBirth!,
-            Email!,
-            Phone!
-        );
+
+        //inverts dateofbirth email and phone???
+        return new Player(Elo, FirstName, LastName, DateOfBirth, Email, Phone);
 
     }
 

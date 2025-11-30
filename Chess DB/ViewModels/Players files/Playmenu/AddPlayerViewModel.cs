@@ -7,6 +7,8 @@ using Chess_DB.Services;
 using CommunityToolkit.Mvvm.Input;
 
 using System.Collections.ObjectModel;
+using Chess_DB.Controls;
+
 public partial class AddPlayerViewModel : ViewModelBase
 {
     public AddPlayerViewModel()
@@ -23,6 +25,7 @@ public partial class AddPlayerViewModel : ViewModelBase
 
         AppServices.PlayerService.Players.Add(player);
         AppServices.PlayerService.Save();
+        NavigationService.Navigate(new PlayerMenu());
 
 
     }
