@@ -1,0 +1,76 @@
+
+
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.EditPlayerPage"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:EditPlayerViewModel"
+    >
+
+    <UserControl.Styles>
+    
+        <Style Selector="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Spacing" Value="15"/>
+            <!-- <Setter Property="Height" Value="30"/>  -->
+
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    
+    </UserControl.Styles>
+
+
+
+    <Grid RowDefinitions="10*, Auto,5*,Auto,5*,Auto,5*,Auto,5*,Auto,5*,Auto, 10*" ColumnDefinitions="10*, 150,297, 10*" Margin="10"  >
+
+    <TextBlock Text="First Name" Grid.Row="1" Grid.Column="1"/>
+    <TextBox    Text="{Binding New_FirstName}"  Grid.Row="1" Grid.Column="2"/>
+
+
+
+    <TextBlock Text="Last Name" Grid.Row="3" Grid.Column="1"/>
+    <TextBox  Text="{Binding New_LastName}" Grid.Row="3" Grid.Column="2"/>
+
+
+
+    <TextBlock Text="Date of birth" Grid.Row="5" Grid.Column="1"/>
+    <DatePicker SelectedDate="{Binding New_DateOfBirth}"   Grid.Row="5"  Grid.Column="2" CornerRadius="8"/>
+
+
+
+    <TextBlock Text="Elo" Grid.Row="7" Grid.Column="1"/>
+    <TextBox  Text="{Binding New_Elo}"  Grid.Row="7"  Grid.Column="2"/>
+
+
+
+    <TextBlock Text="Email" Grid.Row="9" Grid.Column="1"/>
+    <TextBox  Text="{Binding New_Email}"  Grid.Row="9"  Grid.Column="2"/>
+
+
+    <TextBlock Text="Phone Number"  Grid.Row="11 " Grid.Column="1"/>
+    <TextBox  Text="{Binding New_Phone}"   Grid.Row="11 "  Grid.Column="2"/>
+
+    <Button Content="Submit"                    Grid.Row="5" Grid.Column="3"
+            Background="ForestGreen" Foreground="White" HorizontalAlignment="Center"
+            Command="{Binding SubmitCommand}"/>
+
+
+
+
+    </Grid>
+
+
+
+
+
+</UserControl>
