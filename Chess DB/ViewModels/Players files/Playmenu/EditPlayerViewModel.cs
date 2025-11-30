@@ -70,15 +70,8 @@ public partial class EditPlayerViewModel : ViewModelBase
         SelectedPlayer.Mail = New_Email;
 
 
-        Console.WriteLine($"'NEW FirstName : {SelectedPlayer.FirstName}'",
-                          $"'NEW LastName : {SelectedPlayer.LastName}'",
-                          $"'NEW Elo : {SelectedPlayer.Elo}'",
-                          $"'NEW DateOfBirth : {SelectedPlayer.DateOfBirth}'",
-                          $"'NEW Phone : {SelectedPlayer.Phone}'",
-                          $"'NEW Email : {SelectedPlayer.Mail}'");
-
-
         AppServices.PlayerService.Save();
+        NavigationService.Navigate(new EditPlayer());
     }
 
 

@@ -31,7 +31,7 @@
     </UserControl.Styles>
     
     <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
-        <TextBlock Text="List rendered as StackPanel of Buttons:" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
+        <TextBlock Text="Player List (Format -> Id : FirstName LastName)" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
         <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
         by generating a separate visual container for each item in that collection each one can
         be selected and then chosen to make something out of it. -->
@@ -39,17 +39,23 @@
             <ListBox ItemsSource="{Binding List_player}" 
                      SelectedItem="{Binding SelectedPlayer}"
                      SelectionMode="Single">
+                <!-- ItemsPanel is set to STackpanel so that items are displayed as stack -->
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" Spacing="2" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
-
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock
-                            Text="{Binding FirstName}"
-                            HorizontalAlignment="Stretch"/>
+                        <TextBlock HorizontalAlignment="Stretch">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} : {1} {2}">
+                                    <Binding Path="Player_id"/>
+                                    <Binding Path="FirstName"/>
+                                    <Binding Path="LastName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
