@@ -11,7 +11,6 @@
         <Button Classes ="menuBtn" Content = "Modify Tournament"/>
         <Button Classes ="menuBtn" Content = "Delete/Archive Tournament"/>
         <Button Classes ="menuBtn" Content = "Manage Registrations"/>
-        <Button Classes ="menuBtn" Content = "View Tournaments"/>
     </StackPanel>
 
 </UserControl>
