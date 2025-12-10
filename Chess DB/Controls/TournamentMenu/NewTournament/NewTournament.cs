@@ -1,6 +1,8 @@
 
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+
+using Chess_DB.ViewModels;
 using Chess_DB.Services;
 using Avalonia.Interactivity;
 
@@ -11,6 +13,7 @@ namespace Chess_DB.Controls
         public NewTournament()
         {
             InitializeComponent();
+            DataContext = new AddTournamentViewModel();
 
         }
 

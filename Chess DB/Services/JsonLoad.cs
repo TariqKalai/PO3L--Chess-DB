@@ -72,7 +72,7 @@ public class FileService
 
 
 
-    public ObservableCollection<ChessTournament> LoadChessTournaments()
+    public ObservableCollection<ChessTournament> LoadTournaments()
     {
         string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "tournaments.json");
 

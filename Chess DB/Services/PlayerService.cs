@@ -16,7 +16,7 @@ public class PlayerService
 
     public PlayerService()
     {   // LOAD Json file and loads all of it in the PLayers observable collection
-        var loaded = _fileService.Jsonload();
+        var loaded = _fileService.LoadPlayers();
         Players = new ObservableCollection<Player>(loaded);
     }
 

@@ -2,6 +2,8 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Chess_DB.Controls.NewTournament"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:AddTournamentViewModel"
     >
 
     <UserControl.Styles>
@@ -60,48 +62,44 @@
     </Grid.RowDefinitions>
     
         <TextBlock Text="Competition Name"          Grid.Row="1"  Grid.Column="1"/>
-        <TextBox                                    Grid.Row="1"  Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.TournamentName}"      Grid.Row="1"  Grid.Column="2"/>
     
         <TextBlock Text="Location"                  Grid.Row="3"  Grid.Column="1"/>
-        <TextBox                                    Grid.Row="3"  Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.Location}"      Grid.Row="3"  Grid.Column="2"/>
     
         <TextBlock Text="Start Date"                Grid.Row="5"  Grid.Column="1"/>
-        <DatePicker                                 Grid.Row="5"  Grid.Column="2"/>
+        <DatePicker SelectedDate="{Binding Form.StartDate}"     Grid.Row="5"  Grid.Column="2"/>
     
         <TextBlock Text="End Date"                  Grid.Row="7"  Grid.Column="1"/>
-        <DatePicker                                 Grid.Row="7"  Grid.Column="2"/>
+        <DatePicker SelectedDate="{Binding Form.EndDate}"      Grid.Row="7"  Grid.Column="2"/>
     
         <TextBlock Text="Competition Type"          Grid.Row="9"  Grid.Column="1"/>
-        <ComboBox                                   Grid.Row="9"  Grid.Column="2">
-            <ComboBoxItem Content="Swiss System"/>
-            <ComboBoxItem Content="Round Robin"/>
-            <ComboBoxItem Content="Knockout"/>
-            <ComboBoxItem Content="Arenas"/>
-        </ComboBox>
+        <ComboBox Grid.Row="9" 
+          Grid.Column="2"
+          ItemsSource="{Binding CompetitionType}"
+          SelectedItem="{Binding SelectedCompetitionType}" />
     
         <TextBlock Text="Time Control"              Grid.Row="11" Grid.Column="1"/>
-        <ComboBox                                   Grid.Row="11" Grid.Column="2">
-            <ComboBoxItem Content="Classical"/>
-            <ComboBoxItem Content="Rapid"/>
-            <ComboBoxItem Content="Blitz"/>
-            <ComboBoxItem Content="Bullet"/>
-            <ComboBoxItem Content="Armageddondd"/>
-        </ComboBox>
+        <ComboBox Grid.Row="11" 
+          Grid.Column="2"
+          ItemsSource="{Binding TimeControls}"
+          SelectedItem="{Binding SelectedTimeControl}" />
     
         <TextBlock Text="Maximum Number of Players" Grid.Row="13" Grid.Column="1"/>
-        <TextBox                                    Grid.Row="13" Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.MaxNumberPlayer}"         Grid.Row="13" Grid.Column="2"/>
     
         <TextBlock Text="Description"               Grid.Row="15" Grid.Column="1"/>
-        <TextBox                                    Grid.Row="15" Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.Description}"            Grid.Row="15" Grid.Column="2"/>
     
         <TextBlock Text="Entry Fee"                 Grid.Row="17" Grid.Column="1"/>
-        <TextBox                                    Grid.Row="17" Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.EntryFee}"               Grid.Row="17" Grid.Column="2"/>
     
         <TextBlock Text="Prize Pool"                Grid.Row="19" Grid.Column="1"/>
-        <TextBox                                    Grid.Row="19" Grid.Column="2"/>
+        <TextBox   Text="{Binding Form.PrizePool}"                Grid.Row="19" Grid.Column="2"/>
     
         <Button Content="Submit"                    Grid.Row="11" Grid.Column="3"
-                Background="ForestGreen" Foreground="White" HorizontalAlignment="Center"/>
+                Background="ForestGreen" Foreground="White" HorizontalAlignment="Center"
+                Command="{Binding SubmitCommand}"/>
 
 
     </Grid>
