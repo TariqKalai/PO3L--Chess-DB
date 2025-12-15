@@ -17,21 +17,57 @@
 
         </Style>
 
-        <Style Selector="TextBox">
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="CornerRadius" Value="3"/>
         </Style>
 
-        <Style Selector="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
+
+    
     
     </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
+        <TextBlock Text="Player List (Format -> Id : FirstName LastName)" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
+        <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
+        by generating a separate visual container for each item in that collection each one can
+        be selected and then chosen to make something out of it. -->
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <ListBox ItemsSource="{Binding List_player}" 
+                     SelectedItem="{Binding SelectedPlayer}"
+                     SelectionMode="Single">
+                <!-- ItemsPanel is set to STackpanel so that items are displayed as stack -->
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Spacing="2" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock HorizontalAlignment="Stretch">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} : {1} {2}">
+                                    <Binding Path="Player_id"/>
+                                    <Binding Path="FirstName"/>
+                                    <Binding Path="LastName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
 
-
-
-    <TextBlock Text="Hello" />
+        <StackPanel Orientation="Vertical" 
+        Grid.Column="1" Grid.Row="1"
+        HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="AddPlayers" Margin="0,0,0,5" Command="{Binding AddPlayersCommand}"/> 
+            <Button Content="Delete" Command="{Binding DeletePlayerCommand}"/> 
+        </StackPanel>
+    </Grid>
 
 
 

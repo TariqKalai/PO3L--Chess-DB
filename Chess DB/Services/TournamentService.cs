@@ -21,10 +21,14 @@ public class TournamentService
 
     public void Create(ChessTournament tournament)
     {
-        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}");
+        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}", "Tournament_players.json");
+        string dir = Path.GetDirectoryName(filePath)!;
+        Directory.CreateDirectory(dir);
 
 
-        Directory.CreateDirectory(filePath);
+        var empty = new ObservableCollection<Player>();
+        string json = JsonSerializer.Serialize(empty, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(filePath, json);
     }
     //just calls fileservice to save the current tournament list in the json file
     public void Save()
@@ -35,8 +39,18 @@ public class TournamentService
         _fileService.SaveTournaments(TournamentsList);
     }
 
-    // public ObservableCollection<Player> Registration()
-    // {
-    //     return 
-    // }
+    public ObservableCollection<Player> LoadRegistration(ChessTournament tournament)
+    {
+        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}", "Tournament_players.json");
+        string json = File.ReadAllText(filePath);
+        return JsonSerializer.Deserialize<ObservableCollection<Player>>(json) ?? new ObservableCollection<Player>();
+    }
+
+    public void ModifyRegistration(ChessTournament tournament, ObservableCollection<Player> PlayerList)
+    {
+        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}", "Tournament_players.json");
+
+        string json = JsonSerializer.Serialize(PlayerList, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(filePath, json);
+    }
 }

@@ -22,6 +22,28 @@ public partial class ManageRegistrationViewModel : ViewModelBase
 
 
 
+    public ObservableCollection<Player> List_PlayerSelect { get; set; }
+    public ObservableCollection<Player> List_player { get; set; }
+
+    [ObservableProperty]
+    //Make it so it is grayed out if nothing is sleected
+    [NotifyCanExecuteChangedFor(nameof(DeletePlayerCommand))]
+    private Player? _selectedPlayer;
+
+    [RelayCommand(CanExecute = nameof(CanAlterPlayer))]
+    public void DeletePlayer()
+    {
+
+        Console.WriteLine($"Removed player '{SelectedPlayer!.FirstName}'");
+        List_player.Remove(SelectedPlayer);
+        //need to save of course
+        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player);
+
+
+    }
+
+
+
     // Just loadiing player in a variable to use it later in axaml
     public ObservableCollection<ChessTournament> List_tournament => AppServices.TournamentService.TournamentsList;
 
@@ -29,6 +51,12 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     //Make it so it is grayed out if nothing is selected
     [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
     private ChessTournament? _selectedTournament;
+
+
+    [ObservableProperty]
+    //Make it so it is grayed out if nothing is selected
+    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
+    private ObservableCollection<Player>? _selectedPlayers;
     public ManageRegistrationViewModel()
     {
 
@@ -42,7 +70,14 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     public void SelectTournament()
     {
         //this to give current datacontext all variables;...
+        this.List_player = AppServices.TournamentService.LoadRegistration(SelectedTournament!);
         NavigationService.Navigate(new ManageRegistrationPage(this));
+    }
+
+    [RelayCommand(CanExecute = nameof(CanSubmitPlayers))]
+    public void Submit()
+    {
+        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, SelectedPlayers!);
     }
 
 
@@ -53,6 +88,18 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     {
         return SelectedTournament != null;
     }
+    private bool CanAlterPlayer()
+    {
+        return SelectedPlayer != null;
+    }
+
+    private bool CanSubmitPlayers()
+    {
+        return SelectedPlayers != null;
+    }
+
+
+
 
 
 }
