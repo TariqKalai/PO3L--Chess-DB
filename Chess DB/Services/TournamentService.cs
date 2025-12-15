@@ -19,6 +19,13 @@ public class TournamentService
         TournamentsList = new ObservableCollection<ChessTournament>(loaded);
     }
 
+    public void Create(ChessTournament tournament)
+    {
+        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}");
+
+
+        Directory.CreateDirectory(filePath);
+    }
     //just calls fileservice to save the current tournament list in the json file
     public void Save()
     {
@@ -27,4 +34,9 @@ public class TournamentService
 
         _fileService.SaveTournaments(TournamentsList);
     }
+
+    // public ObservableCollection<Player> Registration()
+    // {
+    //     return 
+    // }
 }

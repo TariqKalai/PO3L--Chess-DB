@@ -53,6 +53,8 @@ public partial class AddTournamentViewModel : ViewModelBase
         var tournament = Form.SubmitTournament();
         AppServices.TournamentService.TournamentsList.Add(tournament);
         AppServices.TournamentService.Save();
+
+        AppServices.TournamentService.Create(tournament);
         NavigationService.Navigate(new TournamentMenu());
 
 

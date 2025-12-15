@@ -9,6 +9,10 @@ public partial class ChessTournament : Tournament
     public string CompetitionType { get; set; }
     public string TimeControl { get; set; }
 
+    private static int ID_incrementation = 0;
+
+    public int Tournament_id { get; set; }
+
     public ChessTournament(string TournamentName,
                            string Location,
                            string StartDate,
@@ -23,6 +27,10 @@ public partial class ChessTournament : Tournament
      MaxNumberPlayer, Description, EntryFee, PrizePool)
     {
 
+
+        ID_incrementation += 1;
+
+        Tournament_id = ID_incrementation;
 
         this.CompetitionType = CompetitionType;
         this.TimeControl = TimeControl;
