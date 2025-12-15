@@ -22,10 +22,6 @@ public partial class EditTournamentViewModel : ViewModelBase
         "Armageddon"
     };
 
-    // The Source Generator creates the public 'SelectedTimeControl' property for you
-    [ObservableProperty]
-    private string _new_selectedTimeControl = "Rapid";
-
     public ObservableCollection<string> CompetitionType { get; } = new()
     {
         "Swiss",
