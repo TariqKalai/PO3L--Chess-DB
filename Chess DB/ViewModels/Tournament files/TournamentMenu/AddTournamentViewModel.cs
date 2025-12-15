@@ -49,8 +49,8 @@ public partial class AddTournamentViewModel : ViewModelBase
     {
         Form.CompetitionType = SelectedCompetitionType;
         Form.TimeControl = SelectedTimeControl;
-        var tournament = Form.SubmitTournament();
 
+        var tournament = Form.SubmitTournament();
         AppServices.TournamentService.TournamentsList.Add(tournament);
         AppServices.TournamentService.Save();
         NavigationService.Navigate(new TournamentMenu());

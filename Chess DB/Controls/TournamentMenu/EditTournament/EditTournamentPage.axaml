@@ -1,0 +1,116 @@
+
+
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.EditTournamentPage"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:EditTournamentViewModel"
+    >
+
+    <UserControl.Styles>
+    
+        <Style Selector="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Spacing" Value="15"/>
+            <!-- <Setter Property="Height" Value="30"/>  -->
+
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    
+    </UserControl.Styles>
+
+
+
+    
+    <Grid ColumnDefinitions="10*, 200,297, 10*" Margin="10" >
+    
+    <Grid.RowDefinitions>
+        
+   <!--Left Margin -->        <RowDefinition    Height="10*"/>
+
+
+   <!-- Row 1 -->   <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 3 -->   <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 5 -->   <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 7 -->   <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 9 -->   <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 11 -->  <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 13 -->  <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 15 -->  <RowDefinition    Height="100"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 17 -->  <RowDefinition    Height="Auto"/>
+                    <RowDefinition    Height="5*"/>
+   <!-- Row 19 -->  <RowDefinition    Height="Auto"/>
+
+
+ <!--Right Margin --><RowDefinition    Height="10*"/>
+
+    </Grid.RowDefinitions>
+    
+        <TextBlock Text="Competition Name"          Grid.Row="1"  Grid.Column="1"/>
+        <TextBox   Text="{Binding New_TournamentName}"      Grid.Row="1"  Grid.Column="2"/>
+    
+        <TextBlock Text="Location"                  Grid.Row="3"  Grid.Column="1"/>
+        <TextBox   Text="{Binding New_Location}"      Grid.Row="3"  Grid.Column="2"/>
+    
+        <TextBlock Text="Start Date"                Grid.Row="5"  Grid.Column="1"/>
+        <DatePicker SelectedDate="{Binding New_StartDate}"     Grid.Row="5"  Grid.Column="2"/>
+    
+        <TextBlock Text="End Date"                  Grid.Row="7"  Grid.Column="1"/>
+        <DatePicker SelectedDate="{Binding New_EndDate}"      Grid.Row="7"  Grid.Column="2"/>
+    
+        <TextBlock Text="Competition Type"          Grid.Row="9"  Grid.Column="1"/>
+        <ComboBox Grid.Row="9" 
+          Grid.Column="2"
+          ItemsSource="{Binding CompetitionType}"
+          SelectedItem="{Binding New_CompetitionType}" />
+    
+        <TextBlock Text="Time Control"              Grid.Row="11" Grid.Column="1"/>
+        <ComboBox Grid.Row="11" 
+          Grid.Column="2"
+          ItemsSource="{Binding TimeControls}"
+          SelectedItem="{Binding New_TimeControl}" />
+    
+        <TextBlock Text="Maximum Number of Players" Grid.Row="13" Grid.Column="1"/>
+        <TextBox   Text="{Binding New_MaxNumberPlayer}"         Grid.Row="13" Grid.Column="2"/>
+    
+        <TextBlock Text="Description"               Grid.Row="15" Grid.Column="1"/>
+        <TextBox   Text="{Binding New_Description}"            Grid.Row="15" Grid.Column="2"/>
+    
+        <TextBlock Text="Entry Fee"                 Grid.Row="17" Grid.Column="1"/>
+        <TextBox   Text="{Binding New_EntryFee}"               Grid.Row="17" Grid.Column="2"/>
+    
+        <TextBlock Text="Prize Pool"                Grid.Row="19" Grid.Column="1"/>
+        <TextBox   Text="{Binding New_PrizePool}"                Grid.Row="19" Grid.Column="2"/>
+    
+        <Button Content="Submit"                    Grid.Row="11" Grid.Column="3"
+                Background="ForestGreen" Foreground="White" HorizontalAlignment="Center"
+                Command="{Binding SubmitCommand}"/>
+
+
+    </Grid>
+    
+
+
+
+
+
+
+</UserControl>

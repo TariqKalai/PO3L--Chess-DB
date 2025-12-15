@@ -8,7 +8,7 @@
 
     <StackPanel>
         <Button Classes ="menuBtn"  Content ="New Tournament" Click="GoNewTournament"/>
-        <Button Classes ="menuBtn" Content = "Modify Tournament"/>
+        <Button Classes ="menuBtn" Content = "Modify Tournament" Click="GoEditTournament"/>
         <Button Classes ="menuBtn" Content = "Delete/Archive Tournament"/>
         <Button Classes ="menuBtn" Content = "Manage Registrations"/>
     </StackPanel>

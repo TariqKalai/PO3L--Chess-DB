@@ -21,4 +21,9 @@ public partial class TournamentMenu : UserControl
         NavigationService.Navigate(new NewTournament());
     }
 
+    private void GoEditTournament(object? sender, RoutedEventArgs e)
+    {
+        NavigationService.Navigate(new EditTournament());
+    }
+
 }
