@@ -44,7 +44,13 @@ public partial class ManageGamesViewModel : ViewModelBase
         //this to give current datacontext all variables;...
         NavigationService.Navigate(new ManageGamesPage(this));
     }
+    [RelayCommand]
+    public void Add()
+    {
 
+
+        NavigationService.Navigate(new AddGame());
+    }
 
 
 

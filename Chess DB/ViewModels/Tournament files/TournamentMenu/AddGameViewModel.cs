@@ -1,6 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
+using Chess_DB.Controls;
 using Chess_DB.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -9,14 +9,16 @@ namespace Chess_DB.ViewModels;
 
 public partial class AddGameViewModel : ViewModelBase
 {
-    // Lists for ComboBoxes
-    public ObservableCollection<Player> Players => AppServices.PlayerService.PlayersList;
-    public ObservableCollection<ChessTournament> Tournaments => AppServices.TournamentService.TournamentsList;
+    public ObservableCollection<ChessTournament> Tournaments
+        => AppServices.TournamentService.TournamentsList;
+
+    // ✅ Players = joueurs inscrits au tournoi sélectionné
+    [ObservableProperty]
+    private ObservableCollection<Player> _players = new();
 
     public Array Colors => Enum.GetValues(typeof(ChessColor));
     public Array Results => Enum.GetValues(typeof(GameResult));
 
-    // Selections / form fields
     [ObservableProperty] private ChessTournament? _selectedTournament;
     [ObservableProperty] private Player? _selectedPlayer1;
     [ObservableProperty] private Player? _selectedPlayer2;
@@ -24,16 +26,39 @@ public partial class AddGameViewModel : ViewModelBase
     [ObservableProperty] private ChessColor _player1Color = ChessColor.White;
     [ObservableProperty] private GameResult _result = GameResult.Draw;
 
-    // Moves as a multi-line text (easy UX)
     [ObservableProperty] private string _movesText = "";
-
     [ObservableProperty] private string _errorMessage = "";
 
     public AddGameViewModel()
     {
-        // Optional defaults
-        if (Tournaments.Count > 0) SelectedTournament = Tournaments[0];
+        if (Tournaments.Count > 0)
+            SelectedTournament = Tournaments[0]; // déclenche le chargement des registrations
     }
+
+    // ✅ Quand on change de tournoi, on recharge la liste des joueurs inscrits
+    partial void OnSelectedTournamentChanged(ChessTournament? value)
+    {
+        ErrorMessage = "";
+
+        SelectedPlayer1 = null;
+        SelectedPlayer2 = null;
+
+        if (value == null)
+        {
+            Players = new ObservableCollection<Player>();
+        }
+        else
+        {
+            // IMPORTANT: LoadRegistration doit retourner une ObservableCollection<Player>
+            Players = AppServices.TournamentService.LoadRegistration(value)
+                      ?? new ObservableCollection<Player>();
+        }
+
+        SubmitCommand.NotifyCanExecuteChanged();
+    }
+
+    partial void OnSelectedPlayer1Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
+    partial void OnSelectedPlayer2Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
 
     private bool CanSubmit()
     {
@@ -50,19 +75,15 @@ public partial class AddGameViewModel : ViewModelBase
 
         if (!CanSubmit())
         {
-            ErrorMessage = "Please select a tournament and two different players.";
+            ErrorMessage = "Choisis un tournoi et 2 joueurs différents.";
             return;
         }
 
-        // Split moves: 1 move per line, ignore empty lines
         var moves = new ObservableCollection<string>(
             (MovesText ?? "")
-            .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(m => m.Trim())
-            .Where(m => !string.IsNullOrWhiteSpace(m))
+                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
         );
 
-        // Create game (needs ChessGame NOT abstract + should have settable Id in base)
         var game = new ChessGame(
             SelectedPlayer1!,
             SelectedPlayer2!,
@@ -71,15 +92,11 @@ public partial class AddGameViewModel : ViewModelBase
             moves
         );
 
-        // Save in tournament folder (your GameFileService should have this overload)
+        // Si tu sauvegardes par tournoi:
         AppServices.GameFileService.SaveGame(game, SelectedTournament!);
 
-        // Optional: navigate back
-        // NavigationService.GoBack();
-    }
 
-    // When any important field changes, update CanExecute
-    partial void OnSelectedTournamentChanged(ChessTournament? value) => SubmitCommand.NotifyCanExecuteChanged();
-    partial void OnSelectedPlayer1Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
-    partial void OnSelectedPlayer2Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
+        // Optionnel: navigation back
+        NavigationService.Navigate(new ManageGames());
+    }
 }
