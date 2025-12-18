@@ -31,7 +31,7 @@
     </UserControl.Styles>
     
     <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
-        <TextBlock Text="Tournament List (Format -> Tournament Name)" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
+        <TextBlock Text="Choose the tournament where you want to register players" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
         <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
         by generating a separate visual container for each item in that collection each one can
         be selected and then chosen to make something out of it. -->

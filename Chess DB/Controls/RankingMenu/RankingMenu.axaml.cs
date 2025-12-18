@@ -1,20 +1,13 @@
-
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Chess_DB.ViewModels;
 
-namespace Chess_DB.Controls
+namespace Chess_DB.Controls;
+
+public partial class RankingMenu : UserControl
 {
-    public partial class RankingMenu : UserControl
+    public RankingMenu()
     {
-        public RankingMenu()
-        {
-            InitializeComponent();
-
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        InitializeComponent();
+        DataContext = new RankingViewModel();
     }
 }

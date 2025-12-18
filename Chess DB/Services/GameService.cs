@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 
 namespace Chess_DB.Services;
+//GamefileService manages files for games, so creation, loading, deleting,...
 
 public class GameFileService
 {
@@ -18,9 +19,7 @@ public class GameFileService
         );
     }
 
-    // -----------------------------
-    // Save
-    // -----------------------------
+
     public void SaveGame(ChessGame game, ChessTournament tournament)
     {
         string GamesDir = GetGamesDir(tournament);
@@ -39,9 +38,7 @@ public class GameFileService
         File.WriteAllText(filePath, json);
     }
 
-    // -----------------------------
-    // Load one
-    // -----------------------------
+
     public ChessGame? LoadGame(string fileName, ChessTournament tournament)
     {
 
@@ -61,9 +58,6 @@ public class GameFileService
         }
     }
 
-    // -----------------------------
-    // Load all
-    // -----------------------------
     public ObservableCollection<ChessGame> LoadAllGames(ChessTournament tournament)
     {
 
@@ -79,18 +73,14 @@ public class GameFileService
                 if (game != null)
                     games.Add(game);
             }
+            //ignorer corrupt files
             catch (JsonException)
             {
-                // ignore corrupted file
             }
         }
 
         return games;
     }
-
-    // -----------------------------
-    // Delete
-    // -----------------------------
     public bool DeleteGame(int gameId, ChessTournament tournament)
     {
 

@@ -12,7 +12,6 @@ public partial class AddGameViewModel : ViewModelBase
     public ObservableCollection<ChessTournament> Tournaments
         => AppServices.TournamentService.TournamentsList;
 
-    // ✅ Players = joueurs inscrits au tournoi sélectionné
     [ObservableProperty]
     private ObservableCollection<Player> _players = new();
 
@@ -20,7 +19,12 @@ public partial class AddGameViewModel : ViewModelBase
     public Array Results => Enum.GetValues(typeof(GameResult));
 
     [ObservableProperty] private ChessTournament? _selectedTournament;
+
+    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
     [ObservableProperty] private Player? _selectedPlayer1;
+
+
+    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
     [ObservableProperty] private Player? _selectedPlayer2;
 
     [ObservableProperty] private ChessColor _player1Color = ChessColor.White;
@@ -30,12 +34,13 @@ public partial class AddGameViewModel : ViewModelBase
     [ObservableProperty] private string _errorMessage = "";
 
     public AddGameViewModel()
-    {
+    { //on initialise SelectedTournament pour qu il ne soit pas null 
         if (Tournaments.Count > 0)
-            SelectedTournament = Tournaments[0]; // déclenche le chargement des registrations
+            SelectedTournament = Tournaments[0];
     }
 
-    // ✅ Quand on change de tournoi, on recharge la liste des joueurs inscrits
+    // lorsqu'on change de tournoi, on remet les player selected a null, parfois on n a pas les meme joueur dans 
+    // tournoi
     partial void OnSelectedTournamentChanged(ChessTournament? value)
     {
         ErrorMessage = "";
@@ -57,25 +62,26 @@ public partial class AddGameViewModel : ViewModelBase
         SubmitCommand.NotifyCanExecuteChanged();
     }
 
-    partial void OnSelectedPlayer1Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
-    partial void OnSelectedPlayer2Changed(Player? value) => SubmitCommand.NotifyCanExecuteChanged();
-
+    //notify Submit qu'on peut ou pas appuyer dessus
     private bool CanSubmit()
     {
         if (SelectedTournament == null) return false;
         if (SelectedPlayer1 == null || SelectedPlayer2 == null) return false;
-        if (ReferenceEquals(SelectedPlayer1, SelectedPlayer2)) return false;
+        if (SelectedPlayer1 == SelectedPlayer2) return false;
         return true;
     }
 
     [RelayCommand(CanExecute = nameof(CanSubmit))]
     private void Submit()
     {
+        Console.WriteLine("=== SUBMIT GAME ===");
+
         ErrorMessage = "";
 
         if (!CanSubmit())
         {
             ErrorMessage = "Choisis un tournoi et 2 joueurs différents.";
+            Console.WriteLine("Submit aborted: CanSubmit() == false");
             return;
         }
 
@@ -92,11 +98,28 @@ public partial class AddGameViewModel : ViewModelBase
             moves
         );
 
-        // Si tu sauvegardes par tournoi:
+        Console.WriteLine(
+            $"Game created: {SelectedPlayer1!.FirstName} ({SelectedPlayer1.Elo}) vs " +
+            $"{SelectedPlayer2!.FirstName} ({SelectedPlayer2.Elo}) | Result: {Result}"
+        );
+
         AppServices.GameFileService.SaveGame(game, SelectedTournament!);
+        Console.WriteLine("Game saved.");
 
+        Console.WriteLine("Applying Elo...");
+        AppServices.EloCalculator.Apply(game);
 
-        // Optionnel: navigation back
+        AppServices.PlayerService.Save();
+        Console.WriteLine("Players saved.");
+
+        Console.WriteLine(
+            $"Elo AFTER: {SelectedPlayer1.FirstName} = {SelectedPlayer1.Elo}, " +
+            $"{SelectedPlayer2.FirstName} = {SelectedPlayer2.Elo}"
+        );
+
+        Console.WriteLine("=== END SUBMIT ===\n");
+
         NavigationService.Navigate(new ManageGames());
     }
+
 }

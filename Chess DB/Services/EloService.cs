@@ -1,23 +1,23 @@
 using System;
 
-public class FideEloCalculator
+public class EloCalculator
 {
+
     public void Apply(Game game)
     {
         var a = game.Player1;
         var b = game.Player2;
 
-        double sa = ScoreForPlayer1(game.Result);      // W pour Player1
+        double sa = ScoreForPlayer1(game.Result);      
         double sb = 1.0 - sa;
 
         int ra = a.Elo;
         int rb = b.Elo;
 
-        // D = Ra - Rb (FIDE)
         int dA = ra - rb;
         int dB = rb - ra;
 
-        // Cap à 400 sauf exception 2650+ (depuis 01/10/2025)
+        // Cap à 400 sauf exception 2650+
         dA = CapRatingDiff(dA, ra);
         dB = CapRatingDiff(dB, rb);
 

@@ -36,7 +36,8 @@
         by generating a separate visual container for each item in that collection each one can
         be selected and then chosen to make something out of it. -->
         <ScrollViewer Grid.Column="0" Grid.Row="1">
-            <ListBox ItemsSource="{Binding List_games}" 
+            <ListBox ItemsSource="{Binding List_games}"
+                     SelectedItem="{Binding SelectedGame}" 
                      SelectionMode="Single">
                 <!-- ItemsPanel is set to STackpanel so that items are displayed as stack -->
                 <ListBox.ItemsPanel>
@@ -63,7 +64,7 @@
         <StackPanel Orientation="Vertical" 
         Grid.Column="1" Grid.Row="1"
         HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Delete" /> 
+            <Button Content="Delete" Command="{Binding DeleteCommand}" /> 
         </StackPanel>
     </Grid>
 

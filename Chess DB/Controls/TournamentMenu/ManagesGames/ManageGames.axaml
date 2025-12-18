@@ -31,7 +31,8 @@
     </UserControl.Styles>
     
     <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
-        <TextBlock Text="Tournament List (Format -> Tournament Name)" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
+        <TextBlock Text="Here is a list of the tournaments where you can manage the games, to delete a game select the tournament then delete hte game inside, 
+        to add a new game just click on add New game and answers the prompts" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
         <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
         by generating a separate visual container for each item in that collection each one can
         be selected and then chosen to make something out of it. -->

@@ -4,6 +4,7 @@ using System.Text.Json;
 using System;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 namespace Chess_DB.Services;
 
 public class TournamentService
@@ -39,18 +40,53 @@ public class TournamentService
         _fileService.SaveTournaments(TournamentsList);
     }
 
+
     public ObservableCollection<Player> LoadRegistration(ChessTournament tournament)
     {
-        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}", "Tournament_players.json");
+        string filePath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Data",
+            "Tournaments",
+            $"{tournament.Tournament_id} - {tournament.TournamentName}",
+            "Tournament_players.json"
+        );
+
+        if (!File.Exists(filePath))
+            return new ObservableCollection<Player>();
+
         string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<ObservableCollection<Player>>(json) ?? new ObservableCollection<Player>();
+
+        var ids = JsonSerializer.Deserialize<ObservableCollection<int>>(json)
+                  ?? new ObservableCollection<int>();
+
+        var globalPlayers = AppServices.PlayerService.Players;
+
+        var players = ids
+            .Select(id => globalPlayers.FirstOrDefault(p => p.Player_id == id))
+            .Where(p => p != null)
+            .ToList();
+
+        return new ObservableCollection<Player>(players!);
     }
 
-    public void ModifyRegistration(ChessTournament tournament, ObservableCollection<Player> PlayerList)
-    {
-        string filePath = Path.Combine(AppContext.BaseDirectory, "Data", "Tournaments", $"{tournament.Tournament_id} - {tournament.TournamentName}", "Tournament_players.json");
 
-        string json = JsonSerializer.Serialize(PlayerList, new JsonSerializerOptions { WriteIndented = true });
+    public void ModifyRegistration(ChessTournament tournament, ObservableCollection<Player> players)
+    {
+        string dir = Path.Combine(
+            AppContext.BaseDirectory,
+            "Data",
+            "Tournaments",
+            $"{tournament.Tournament_id} - {tournament.TournamentName}"
+        );
+
+        Directory.CreateDirectory(dir);
+
+        string filePath = Path.Combine(dir, "Tournament_players.json");
+
+        var ids = new ObservableCollection<int>(players.Select(p => p.Player_id));
+
+        string json = JsonSerializer.Serialize(ids, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(filePath, json);
     }
+
 }

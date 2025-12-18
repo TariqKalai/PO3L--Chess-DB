@@ -7,9 +7,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Chess_DB.Controls;
 
-// TO use the excpet for remaining player list
-using System.Linq;
-using Avalonia.Rendering.Composition;
 
 
 namespace Chess_DB.ViewModels;
@@ -36,6 +33,10 @@ public partial class ManageGamesViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
     private ChessTournament? _selectedTournament;
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(DeleteCommand))]
+    private ChessGame? _selectedGame;
+
 
     //READ bellow what happens
     [RelayCommand(CanExecute = nameof(CanAlterTournament))]
@@ -50,6 +51,15 @@ public partial class ManageGamesViewModel : ViewModelBase
 
 
         NavigationService.Navigate(new AddGame());
+    }
+    [RelayCommand(CanExecute = nameof(CanDelete))]
+    public void Delete()
+    {
+        if (SelectedTournament == null || SelectedGame == null)
+            return;
+        AppServices.GameFileService.DeleteGame(SelectedGame.Match_id, SelectedTournament);
+        List_games.Remove(SelectedGame);
+        SelectedGame = null;
     }
 
 
@@ -66,6 +76,11 @@ public partial class ManageGamesViewModel : ViewModelBase
         return false;
     }
 
+
+    private bool CanDelete()
+    {
+        return SelectedGame != null;
+    }
 
 
 
