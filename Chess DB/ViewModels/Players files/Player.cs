@@ -35,10 +35,6 @@ public partial class Player : Person
     }
 
 
-    public void Change_elo(int new_elo)
-    {
-        Elo = new_elo;
-    }
 
     public override string ToString()
     {
