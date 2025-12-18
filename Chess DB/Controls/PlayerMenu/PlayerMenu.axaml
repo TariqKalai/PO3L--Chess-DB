@@ -12,7 +12,6 @@
         <Button Classes ="menuBtn" Content = "Edit/Delete Player" Click="GoEditPlayer" />
         <!-- <Button Classes ="menuBtn" Content = "Delete/archive Player" /> -->
         <!-- <Button Classes ="menuBtn" Content = "Search Player" /> -->
-        <Button Classes ="menuBtn" Content = "Export Player list" />
     </StackPanel>
 
 </UserControl>

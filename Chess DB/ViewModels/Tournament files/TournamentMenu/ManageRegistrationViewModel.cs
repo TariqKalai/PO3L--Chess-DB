@@ -22,7 +22,7 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     // Creating New observable attributes so  that ater on we can put them inside the selected tournament
     [ObservableProperty] private string? _new_TournamentName;
     [ObservableProperty] private int _new_MaxNumberPlayer;
-    [ObservableProperty] private string _new_CompetitionType;
+    [ObservableProperty] private string _new_CompetitionType = string.Empty;
 
 
 
@@ -77,12 +77,6 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     //Make it so it is grayed out if nothing is selected
     [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
     private Player? _selectedPlayers;
-    public ManageRegistrationViewModel()
-    {
-
-
-    }
-
 
 
     //READ bellow what happens
@@ -97,6 +91,7 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanSubmitPlayers))]
     public void Submit()
     {
+        if (SelectedPlayers is null) return;
         List_player.Add(SelectedPlayers);
 
         AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player!);

@@ -38,8 +38,8 @@ public partial class EditTournamentViewModel : ViewModelBase
     [ObservableProperty] private string? _new_StartDate;
     [ObservableProperty] private string? _new_EndDate;
     [ObservableProperty] private int _new_MaxNumberPlayer;
-    [ObservableProperty] private string _new_CompetitionType;
-    [ObservableProperty] private string _new_TimeControl;
+    [ObservableProperty] private string _new_CompetitionType = string.Empty;
+    [ObservableProperty] private string _new_TimeControl = string.Empty;
     [ObservableProperty] private string? _new_Description;
     [ObservableProperty] private int _new_EntryFee;
     [ObservableProperty] private int _new_PrizePool;
@@ -54,18 +54,13 @@ public partial class EditTournamentViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(DeleteTournamentCommand))]
     [NotifyCanExecuteChangedFor(nameof(ModifyTournamentCommand))]
     private ChessTournament? _selectedTournament;
-    public EditTournamentViewModel()
-    {
-
-
-    }
-
 
 
     //READ bellow what happens
     [RelayCommand(CanExecute = nameof(CanAlterTournament))]
     public void ModifyTournament()
     {
+        if (SelectedTournament is null) return;
 
         New_TournamentName = SelectedTournament.TournamentName;
         New_Location = SelectedTournament.Location;
@@ -85,16 +80,17 @@ public partial class EditTournamentViewModel : ViewModelBase
     [RelayCommand] //Maybe add condition to grey out button
     public void Submit()
     {
+        if (SelectedTournament is null) return;
 
         //simple enough just changing the vars
-        SelectedTournament.TournamentName = New_TournamentName;
-        SelectedTournament.Location = New_Location;
-        SelectedTournament.StartDate = New_StartDate;
-        SelectedTournament.EndDate = New_EndDate;
+        SelectedTournament.TournamentName = New_TournamentName!;
+        SelectedTournament.Location = New_Location!;
+        SelectedTournament.StartDate = New_StartDate!;
+        SelectedTournament.EndDate = New_EndDate!;
         SelectedTournament.CompetitionType = New_CompetitionType;
         SelectedTournament.TimeControl = New_TimeControl;
         SelectedTournament.MaxNumberPlayer = New_MaxNumberPlayer;
-        SelectedTournament.Description = New_Description;
+        SelectedTournament.Description = New_Description!;
         SelectedTournament.EntryFee = New_EntryFee;
         SelectedTournament.PrizePool = New_PrizePool;
 
@@ -108,6 +104,7 @@ public partial class EditTournamentViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanAlterTournament))]
     public void DeleteTournament()
     {
+        if (SelectedTournament is null) return;
 
         Console.WriteLine($"Removed tournament '{SelectedTournament.TournamentName}'");
         List_tournament.Remove(SelectedTournament);

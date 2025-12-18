@@ -16,12 +16,12 @@ public partial class EditPlayerViewModel : ViewModelBase
 
 
     // Creating New observable attributes so  that ater on we can put them inside the selected player
-    [ObservableProperty] private string _new_FirstName;
-    [ObservableProperty] private string _new_LastName;
+    [ObservableProperty] private string? _new_FirstName;
+    [ObservableProperty] private string? _new_LastName;
     [ObservableProperty] private int _new_Elo;
-    [ObservableProperty] private string _new_DateOfBirth;
-    [ObservableProperty] private string _new_Phone;
-    [ObservableProperty] private string _new_Email;
+    [ObservableProperty] private string? _new_DateOfBirth;
+    [ObservableProperty] private string? _new_Email;
+    [ObservableProperty] private string? _new_Phone;
 
 
 
@@ -33,19 +33,14 @@ public partial class EditPlayerViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(DeletePlayerCommand))]
     [NotifyCanExecuteChangedFor(nameof(ModifyPlayerCommand))]
     private Player? _selectedPlayer;
-    public EditPlayerViewModel()
-    {
-
-
-    }
-
-
+    public EditPlayerViewModel() { }
 
     //READ bellow what happens
     [RelayCommand(CanExecute = nameof(CanAlterPlayer))]
     public void ModifyPlayer()
     {
 
+        if (SelectedPlayer is null) return;
         New_FirstName = SelectedPlayer.FirstName;
         New_LastName = SelectedPlayer.LastName;
         New_Elo = SelectedPlayer.Elo;
@@ -60,14 +55,15 @@ public partial class EditPlayerViewModel : ViewModelBase
     [RelayCommand] //Maybe add condition to grey out button
     public void Submit()
     {
+        if (SelectedPlayer is null) return;
 
         //simple enough just changing the vars
-        SelectedPlayer.FirstName = New_FirstName;
-        SelectedPlayer.LastName = New_LastName;
+        SelectedPlayer.FirstName = New_FirstName!;
+        SelectedPlayer.LastName = New_LastName!;
         SelectedPlayer.Elo = New_Elo;
-        SelectedPlayer.DateOfBirth = New_DateOfBirth;
-        SelectedPlayer.Phone = New_Phone;
-        SelectedPlayer.Mail = New_Email;
+        SelectedPlayer.DateOfBirth = New_DateOfBirth!;
+        SelectedPlayer.Phone = New_Phone!;
+        SelectedPlayer.Mail = New_Email!;
 
 
         AppServices.PlayerService.Save();
@@ -79,6 +75,8 @@ public partial class EditPlayerViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanAlterPlayer))]
     public void DeletePlayer()
     {
+
+        if (SelectedPlayer is null) return;
 
         Console.WriteLine($"Removed player '{SelectedPlayer.FirstName}'");
         List_player.Remove(SelectedPlayer);

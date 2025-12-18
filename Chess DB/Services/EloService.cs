@@ -8,7 +8,7 @@ public class EloCalculator
         var a = game.Player1;
         var b = game.Player2;
 
-        double sa = ScoreForPlayer1(game.Result);      
+        double sa = ScoreForPlayer1(game.Result);
         double sb = 1.0 - sa;
 
         int ra = a.Elo;
@@ -43,7 +43,8 @@ public class EloCalculator
     {
         GameResult.Player1Win => 1.0,
         GameResult.Draw => 0.5,
-        GameResult.Player2Win => 0.0
+        GameResult.Player2Win => 0.0,
+        _ => 0.5 //if result is not valid, should not happen normaly since it is a comboBox
     };
 
     private static int KFactor(int elo)

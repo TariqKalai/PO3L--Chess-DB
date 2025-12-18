@@ -13,19 +13,14 @@ public partial class TournamentViewModel : ViewModelBase
     [ObservableProperty] private string? _startDate;
     [ObservableProperty] private string? _endDate;
     [ObservableProperty] private int _maxNumberPlayer;
-    [ObservableProperty] private string _competitionType;
+    [ObservableProperty] private string _competitionType = string.Empty;
 
-    [ObservableProperty] private string _timeControl;
+    [ObservableProperty] private string _timeControl = string.Empty;
 
     [ObservableProperty] private string? _description;
     [ObservableProperty] private int _entryFee;
     [ObservableProperty] private int _prizePool;
 
-    public TournamentViewModel()
-    {
-
-
-    }
 
     public ChessTournament SubmitTournament()
     {
