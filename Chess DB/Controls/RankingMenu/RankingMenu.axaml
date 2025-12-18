@@ -34,7 +34,6 @@
           <Border Padding="8" CornerRadius="6" BorderThickness="1" BorderBrush="LightGray">
             <TextBlock>
               <TextBlock.Text>
-                <!-- 1) Nom  2) Prénom  3) Elo -->
                 <MultiBinding StringFormat="{}{0}. {1} {2}  —  Elo: {3}">
                   <Binding Path="Rank"/>
                   <Binding Path="Player.FirstName"/>

@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Chess_DB.ViewModels;
 
 namespace Chess_DB.Home_actions
 {
@@ -8,6 +9,7 @@ namespace Chess_DB.Home_actions
         public Stats()
         {
             InitializeComponent();
+            DataContext = new StatsViewModel();
         }
         private void InitializeComponent()
         {

@@ -9,7 +9,7 @@ namespace Chess_DB.Services;
 public class PlayerService
 {
     private readonly FileService _fileService = new();
-    public string loaded;
+    public ObservableCollection<Player> loaded = new();
 
 
     public ObservableCollection<Player> Players;//{get;}

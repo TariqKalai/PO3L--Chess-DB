@@ -47,14 +47,12 @@
             ColumnDefinitions="50*, 50*" 
             RowDefinitions="80, 80" 
             Margin="5" 
-            ShowGridLines="True"
             >
 
 
-            <Button Content="Add Player" Grid.Column="0" Grid.Row="0" />
-            <Button Content="New Competition" Grid.Column="1" Grid.Row="0"/>
-            <Button Content="Backup Data" Grid.Column="1" Grid.Row="1"/>
-            <Button Content="Register Player" Grid.Column="0" Grid.Row="1"/>
+            <Button Content="Add Player" Click="GoAddPlayer" Grid.Column="0" Grid.Row="0" />
+            <Button Content="New Competition" Click="GoNewTournament" Grid.Column="1" Grid.Row="0"/>
+            <Button Content="Register Players" Click="GoRegisterPlayer" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" />
 
 
         </Grid>
