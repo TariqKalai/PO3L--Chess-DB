@@ -1,0 +1,77 @@
+
+
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.ChoosePlayers"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:ManageRegistrationViewModel"
+    >
+
+    <UserControl.Styles>
+     
+        <Style Selector="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Spacing" Value="15"/>
+            <!-- <Setter Property="Height" Value="30"/>  -->
+
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+    
+    
+    </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="*,auto" RowDefinitions="5*, 80*">
+        <TextBlock Text="ADD players(Format -> Id : FirstName LastName)" FontWeight="Bold" Margin="0,0,0,10" Grid.Column="0" Grid.Row="0"/>
+        <!-- ListBox displays a collection of data (a list, array, or any enumerable object) 
+        by generating a separate visual container for each item in that collection each one can
+        be selected and then chosen to make something out of it. -->
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <ListBox ItemsSource="{Binding Remaining_players}"
+                     SelectedItem="{Binding SelectedPlayers}" 
+                     SelectionMode="Multiple">
+                <!-- ItemsPanel is set to STackpanel so that items are displayed as stack -->
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Spacing="2" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock HorizontalAlignment="Stretch">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} : {1} {2}">
+                                    <Binding Path="Player_id"/>
+                                    <Binding Path="FirstName"/>
+                                    <Binding Path="LastName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Vertical" 
+        Grid.Column="1" Grid.Row="1"
+        HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="SubmitPlayers" Margin="0,0,0,5" Command="{Binding SubmitCommand}"/>
+        </StackPanel>
+    </Grid>
+
+    
+
+
+
+
+
+</UserControl>

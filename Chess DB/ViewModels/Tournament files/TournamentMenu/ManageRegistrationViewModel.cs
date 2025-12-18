@@ -7,6 +7,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Chess_DB.Controls;
 
+// TO use the excpet for remaining player list
+using System.Linq;
+using Avalonia.Rendering.Composition;
+
 
 namespace Chess_DB.ViewModels;
 
@@ -22,15 +26,19 @@ public partial class ManageRegistrationViewModel : ViewModelBase
 
 
 
-    public ObservableCollection<Player> List_PlayerSelect { get; set; }
-    public ObservableCollection<Player> List_player { get; set; }
+    [ObservableProperty]
+    private ObservableCollection<Player> _remaining_players = new();
+
+    [ObservableProperty]
+    private ObservableCollection<Player> _list_player = new();
 
     [ObservableProperty]
     //Make it so it is grayed out if nothing is sleected
     [NotifyCanExecuteChangedFor(nameof(DeletePlayerCommand))]
     private Player? _selectedPlayer;
 
-    [RelayCommand(CanExecute = nameof(CanAlterPlayer))]
+    [RelayCommand(CanExecute = nameof(CanDeletePlayer))]
+
     public void DeletePlayer()
     {
 
@@ -38,8 +46,19 @@ public partial class ManageRegistrationViewModel : ViewModelBase
         List_player.Remove(SelectedPlayer);
         //need to save of course
         AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player);
+        AddPlayersCommand.NotifyCanExecuteChanged();
 
 
+    }
+
+    [RelayCommand(CanExecute = nameof(CanAddPlayers))]
+    public void AddPlayers()
+    {
+        Remaining_players = new ObservableCollection<Player>(
+        AppServices.PlayerService.Players.Except(List_player));
+
+
+        NavigationService.Navigate(new ChoosePlayers(this));
     }
 
 
@@ -50,13 +69,14 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     [ObservableProperty]
     //Make it so it is grayed out if nothing is selected
     [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
+    [NotifyCanExecuteChangedFor(nameof(AddPlayersCommand))]
     private ChessTournament? _selectedTournament;
 
 
     [ObservableProperty]
     //Make it so it is grayed out if nothing is selected
     [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
-    private ObservableCollection<Player>? _selectedPlayers;
+    private Player? _selectedPlayers;
     public ManageRegistrationViewModel()
     {
 
@@ -77,7 +97,11 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanSubmitPlayers))]
     public void Submit()
     {
-        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, SelectedPlayers!);
+        List_player.Add(SelectedPlayers);
+
+        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player!);
+
+        NavigationService.Navigate(new ManageRegistrationPage(this));
     }
 
 
@@ -88,7 +112,7 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     {
         return SelectedTournament != null;
     }
-    private bool CanAlterPlayer()
+    private bool CanDeletePlayer()
     {
         return SelectedPlayer != null;
     }
@@ -96,6 +120,12 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     private bool CanSubmitPlayers()
     {
         return SelectedPlayers != null;
+    }
+
+    private bool CanAddPlayers()
+    {
+
+        return (SelectedTournament?.MaxNumberPlayer ?? 0) > List_player.Count;
     }
 
 
