@@ -11,20 +11,29 @@ using System;
 
 namespace Chess_DB.Controls
 {
-    public partial class ManageGames : UserControl
+    public partial class ManageGamesPage : UserControl
     {
-        public ManageGames()
+
+        //or create a page but get the same datacontext to shares variable
+        public ManageGamesPage(ManageGamesViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = new ManageGamesViewModel();
+            DataContext = viewModel;
 
         }
+
+        //eitehr create a NEw page with this one
+
+        public ManageGamesPage()
+        {
+            InitializeComponent();
+        }
+
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
-
 
 
 

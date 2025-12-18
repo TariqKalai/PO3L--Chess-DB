@@ -10,7 +10,7 @@
         <Button Classes ="menuBtn"  Content ="New Tournament" Click="GoNewTournament"/>
         <Button Classes ="menuBtn" Content = "Modify Tournament" Click="GoEditTournament"/>
         <Button Classes ="menuBtn" Content = "Manage Registrations" Click="GoManageRegistration"/>
-        <Button Classes ="menuBtn" Content = "Manage Games"/>
+        <Button Classes ="menuBtn" Content = "Manage Games" Click="GoManageGames"/>
     </StackPanel>
 
 </UserControl>

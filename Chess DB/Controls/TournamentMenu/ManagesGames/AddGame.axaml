@@ -1,0 +1,24 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Chess_DB.Controls.AddGame"
+    xmlns:vm="using:Chess_DB.ViewModels"
+    x:DataType="vm:AddGameViewModel">
+
+  <UserControl.Styles>
+
+    <Style Selector="StackPanel">
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="Spacing" Value="15"/>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+
+    <Style Selector="ComboBox">
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" V

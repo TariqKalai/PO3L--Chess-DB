@@ -7,4 +7,6 @@ public static class AppServices
 {
     public static PlayerService PlayerService { get; } = new PlayerService();
     public static TournamentService TournamentService { get; } = new TournamentService();
+
+    public static GameFileService GameFileService { get; } = new GameFileService();
 }

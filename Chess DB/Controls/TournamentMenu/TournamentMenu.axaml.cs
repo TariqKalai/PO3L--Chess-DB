@@ -30,4 +30,9 @@ public partial class TournamentMenu : UserControl
     {
         NavigationService.Navigate(new ManageRegistration());
     }
+
+    private void GoManageGames(object? sender, RoutedEventArgs e)
+    {
+        NavigationService.Navigate(new ManageGames());
+    }
 }

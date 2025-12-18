@@ -11,12 +11,12 @@ using System;
 
 namespace Chess_DB.Controls
 {
-    public partial class ManageGames : UserControl
+    public partial class AddGame : UserControl
     {
-        public ManageGames()
+        public AddGame()
         {
             InitializeComponent();
-            DataContext = new ManageGamesViewModel();
+            DataContext = new AddGameViewModel();
 
         }
 
@@ -24,7 +24,6 @@ namespace Chess_DB.Controls
         {
             AvaloniaXamlLoader.Load(this);
         }
-
 
 
 
