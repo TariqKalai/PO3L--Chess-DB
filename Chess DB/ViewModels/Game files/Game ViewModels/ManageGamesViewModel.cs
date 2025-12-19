@@ -48,11 +48,10 @@ public partial class ManageGamesViewModel : ViewModelBase
     [RelayCommand]
     public void Add()
     {
-
-
         NavigationService.Navigate(new AddGame());
     }
     [RelayCommand(CanExecute = nameof(CanDelete))]
+
     public void Delete()
     {
         if (SelectedTournament == null || SelectedGame == null)

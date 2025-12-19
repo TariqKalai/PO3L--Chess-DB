@@ -39,24 +39,6 @@ public class GameFileService
     }
 
 
-    public ChessGame? LoadGame(string fileName, ChessTournament tournament)
-    {
-
-        string GamesDir = GetGamesDir(tournament);
-        string path = Path.Combine(GamesDir, fileName);
-        if (!File.Exists(path))
-            return null;
-
-        try
-        {
-            string json = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<ChessGame>(json, new JsonSerializerOptions { WriteIndented = true });
-        }
-        catch (JsonException)
-        {
-            return null;
-        }
-    }
 
     public ObservableCollection<ChessGame> LoadAllGames(ChessTournament tournament)
     {
@@ -81,7 +63,7 @@ public class GameFileService
 
         return games;
     }
-    public bool DeleteGame(int gameId, ChessTournament tournament)
+    public void DeleteGame(int gameId, ChessTournament tournament)
     {
 
         string GamesDir = GetGamesDir(tournament);
@@ -90,10 +72,9 @@ public class GameFileService
             .FirstOrDefault();
 
         if (file == null)
-            return false;
+            return;
 
         File.Delete(file);
-        return true;
     }
 
 

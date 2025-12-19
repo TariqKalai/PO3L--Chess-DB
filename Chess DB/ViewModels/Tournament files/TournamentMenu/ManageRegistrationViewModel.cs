@@ -32,6 +32,53 @@ public partial class ManageRegistrationViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<Player> _list_player = new();
 
+
+
+    // Just loadiing player in a variable to use it later in axaml
+    public ObservableCollection<ChessTournament> List_tournament => AppServices.TournamentService.TournamentsList;
+
+    [ObservableProperty]
+    //Make it so it is grayed out if nothing is selected
+    [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
+    [NotifyCanExecuteChangedFor(nameof(AddPlayersCommand))]
+    private ChessTournament? _selectedTournament;
+
+
+    [RelayCommand(CanExecute = nameof(CanAlterTournament))]
+    public void SelectTournament()
+    {
+        //this to give current datacontext all variables;...
+        this.List_player = AppServices.TournamentService.LoadRegistration(SelectedTournament!);
+        NavigationService.Navigate(new ManageRegistrationPage(this));
+    }
+
+
+
+
+
+
+
+
+    // PARTIE CHOIX DE JOUEUR--------------------------------------------------------------------
+    [ObservableProperty]
+    //Make it so it is grayed out if nothing is selected
+    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
+    private Player? _selectedPlayers;
+
+
+
+
+    [RelayCommand(CanExecute = nameof(CanSubmitPlayers))]
+    public void Submit()
+    {
+        if (SelectedPlayers is null) return;
+        List_player.Add(SelectedPlayers);
+
+        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player!);
+
+        NavigationService.Navigate(new ManageRegistrationPage(this));
+    }
+
     [ObservableProperty]
     //Make it so it is grayed out if nothing is sleected
     [NotifyCanExecuteChangedFor(nameof(DeletePlayerCommand))]
@@ -59,44 +106,6 @@ public partial class ManageRegistrationViewModel : ViewModelBase
 
 
         NavigationService.Navigate(new ChoosePlayers(this));
-    }
-
-
-
-    // Just loadiing player in a variable to use it later in axaml
-    public ObservableCollection<ChessTournament> List_tournament => AppServices.TournamentService.TournamentsList;
-
-    [ObservableProperty]
-    //Make it so it is grayed out if nothing is selected
-    [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
-    [NotifyCanExecuteChangedFor(nameof(AddPlayersCommand))]
-    private ChessTournament? _selectedTournament;
-
-
-    [ObservableProperty]
-    //Make it so it is grayed out if nothing is selected
-    [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
-    private Player? _selectedPlayers;
-
-
-    //READ bellow what happens
-    [RelayCommand(CanExecute = nameof(CanAlterTournament))]
-    public void SelectTournament()
-    {
-        //this to give current datacontext all variables;...
-        this.List_player = AppServices.TournamentService.LoadRegistration(SelectedTournament!);
-        NavigationService.Navigate(new ManageRegistrationPage(this));
-    }
-
-    [RelayCommand(CanExecute = nameof(CanSubmitPlayers))]
-    public void Submit()
-    {
-        if (SelectedPlayers is null) return;
-        List_player.Add(SelectedPlayers);
-
-        AppServices.TournamentService.ModifyRegistration(SelectedTournament!, List_player!);
-
-        NavigationService.Navigate(new ManageRegistrationPage(this));
     }
 
 
