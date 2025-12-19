@@ -1,14 +1,14 @@
 @startuml Class_diagram
-top to bottom direction
+left to right direction
 skinparam linetype ortho
 skinparam nodesep 60
 skinparam ranksep 80
 
-title Diagramme de classe — Metier?
+title Diagramme de classe — Metier
 
 
-' =======================
-' TOUTes les classes (metier?)
+' ----------------------------------------------
+' Toutes les classes (metier?)
 
 abstract class Person {
   + FirstName : string
@@ -108,7 +108,18 @@ EloService .up.> Player
 Player -[hidden]right- ChessGame
 Player -[hidden]up- Tournament
 
+Chess_Tournament -[hidden]right- ChessGame
+
 GameResult -[hidden]left- EloService
 GameResult -[hidden]up- ChessColor
+
+legend left
+<b>Légende</b>
+----
+A : Classe abstraite
+C : Classe concrète
+E : Enum
+<u>static</u>
+endlegend
 
 @enduml
