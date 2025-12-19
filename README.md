@@ -20,7 +20,7 @@ L’application permet de
 
 - Une page <b>Ranking</b> qui permet d’afficher les joueurs classés automatiquement selon leur score ELO, du plus élevé au plus faible
 
-  ![Ranking](/images/Ranking.png)
+  ![Ranking](/Images/Ranking.png)
 
   <p align="center">
   Figure 1 – Home
@@ -28,7 +28,7 @@ L’application permet de
 
 - Une page <b>Home</b> qui permet de voir certaines statistiques globales (nombre de joueurs, elo Moyen, tournois actifs). Elle propose egalement des <b>quick actions</b> permettant d’accéder facilement aux fonctionnalités les plus utilisées (ajout d’un joueur, création d’une compétition, enregistrement d'un joueur).
 
-  ![Home](/images/Home.png)
+  ![Home](/Images/Home.png)
   <p align="center">
   Figure 2 – Ranking
   </p>
