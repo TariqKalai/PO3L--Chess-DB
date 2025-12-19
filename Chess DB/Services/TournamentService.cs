@@ -10,6 +10,7 @@ namespace Chess_DB.Services;
 public class TournamentService
 {
     private readonly FileService _fileService = new();
+    public ChessTournament? CurrentTournament = null;
 
 
     public ObservableCollection<ChessTournament> TournamentsList;//{get;}

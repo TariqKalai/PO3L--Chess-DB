@@ -34,33 +34,26 @@ public partial class AddGameViewModel : ViewModelBase
     [ObservableProperty] private string _errorMessage = "";
 
     public AddGameViewModel()
-    { //on initialise SelectedTournament pour qu il ne soit pas null 
-        if (Tournaments.Count > 0)
+    {
+        var saved = AppServices.TournamentService.CurrentTournament;
+
+        if (saved != null)
+        {
+            SelectedTournament = saved;
+            Players = AppServices.TournamentService.LoadRegistration(saved!) ?? new ObservableCollection<Player>();
+        }
+        else if (Tournaments.Count > 0)
+        {
             SelectedTournament = Tournaments[0];
+            Players = AppServices.TournamentService.LoadRegistration(saved!)
+                      ?? new ObservableCollection<Player>();
+        }
     }
+
 
     // lorsqu'on change de tournoi, on remet les player selected a null, parfois on n a pas les meme joueur dans 
     // tournoi
-    partial void OnSelectedTournamentChanged(ChessTournament? value)
-    {
-        ErrorMessage = "";
 
-        SelectedPlayer1 = null;
-        SelectedPlayer2 = null;
-
-        if (value == null)
-        {
-            Players = new ObservableCollection<Player>();
-        }
-        else
-        {
-            // IMPORTANT: LoadRegistration doit retourner une ObservableCollection<Player>
-            Players = AppServices.TournamentService.LoadRegistration(value)
-                      ?? new ObservableCollection<Player>();
-        }
-
-        SubmitCommand.NotifyCanExecuteChanged();
-    }
 
     //notify Submit qu'on peut ou pas appuyer dessus
     private bool CanSubmit()

@@ -18,7 +18,6 @@ public partial class Player : Person
         Elo = elo;
         Console.WriteLine(String.Format("Player id {0} has been given", Player_id));
     }
-
     [JsonConstructor]
     public Player(int Player_id, int elo, string firstName, string lastName, string dateOfBirth, string mail, string phone) :
      base(firstName, lastName, dateOfBirth, mail, phone)

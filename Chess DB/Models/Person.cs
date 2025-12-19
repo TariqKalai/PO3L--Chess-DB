@@ -10,7 +10,6 @@ public abstract partial class Person : ViewModelBase
     public string Mail { get; set; }
     public string Phone { get; set; }
 
-
     public Person(string firstName, string lastName, string dateOfBirth, string mail, string phone)
     {
         FirstName = firstName;

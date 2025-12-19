@@ -31,6 +31,7 @@ public partial class ManageGamesViewModel : ViewModelBase
     //Make it so it is grayed out if nothing is selected
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SelectTournamentCommand))]
+    [NotifyCanExecuteChangedFor(nameof(AddCommand))]
     private ChessTournament? _selectedTournament;
 
     [ObservableProperty]
@@ -45,11 +46,13 @@ public partial class ManageGamesViewModel : ViewModelBase
         //this to give current datacontext all variables;...
         NavigationService.Navigate(new ManageGamesPage(this));
     }
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanAlterTournament))]
     public void Add()
     {
+        AppServices.TournamentService.CurrentTournament = SelectedTournament;
         NavigationService.Navigate(new AddGame());
     }
+
     [RelayCommand(CanExecute = nameof(CanDelete))]
 
     public void Delete()
@@ -64,16 +67,20 @@ public partial class ManageGamesViewModel : ViewModelBase
 
 
     // Methode created to Allow alteration only if all attributes are  not null, or it 'll initialize something wrong
+
+
+    partial void OnSelectedTournamentChanged(ChessTournament? value)
+    {
+        List_games = value == null
+            ? new ObservableCollection<ChessGame>()
+            : AppServices.GameFileService.LoadAllGames(value);
+    }
+
     private bool CanAlterTournament()
     {
-        if (SelectedTournament != null)
-        {
-            this.List_games = AppServices.GameFileService.LoadAllGames(SelectedTournament);
-            return true;
-        }
-
-        return false;
+        return SelectedTournament != null;
     }
+
 
 
     private bool CanDelete()
