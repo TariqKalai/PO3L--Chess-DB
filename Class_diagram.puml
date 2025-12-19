@@ -1,133 +1,114 @@
 @startuml Class_diagram
+top to bottom direction
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 80
+
+title Diagramme de classe — Metier?
 
 
+' =======================
+' TOUTes les classes (metier?)
+
+abstract class Person {
+  + FirstName : string
+  + LastName : string
+  + DateOfBirth : string
+  + Mail : string
+  + Phone : string
+}
+
+class Player {
+  + Elo : int
+  + Player_id : int
+}
+
+enum GameResult {
+  Player1Win
+  Player2Win
+  Draw
+}
+
+abstract class Game {
+  + Match_id : int
+  + Result : GameResult
+}
+
+enum ChessColor {
+  White
+  Black
+}
+
+
+class ChessGame {
+  + Player1Color : ChessColor
+  + Moves : List[string]
+}
+
+abstract class Tournament {
+  + TournamentName : string
+  + Location : string
+  + StartDate : string
+  + EndDate : string
+  + MaxNumberPlayer : int
+  + Description : string
+  + EntryFee : int
+  + PrizePool : int
+}
+
+class Chess_Tournament {
+  + CompetitionType : string
+  + TimeControl : string
+  + Tournament_id : string
+}
+
+class EloService {
+  + Apply(g : Game) : void
+  - {static} Expected(rating : int) : double
+  - {static} ScoreForPlayer1(result : GameResult) : double
+  - {static} KFactor(rating : int) : int
+  - {static} CapRatingDiff(r1 : int, r2 : int) : int
+}
+
+' ---------------------------------------------------------------
+' Inheritance (HERITAGE)
 Person <|-up- Player
-Player::Elo <-up- Elo_calculator
-Competition -left-* Game
-Backup::SaveCompetition -up-> Competition
-Backup::SavePlayer -left-> Player
-Game::Winner <-left- Elo_calculator
+Game <|-up- ChessGame
+Tournament <|-right- Chess_Tournament
+
+' ---------------------------------------------------------------
+' Associations 
+' Les vies des objets ne sont pas dépendantes
+' Une partie a exactement 2 joueurs, et un joueur peut jouer 0 a .. parties
+Game  "0.." -- "2" Player 
+
+
+' Inscriptions: un tournoi a des joueurs inscrits, un joueur peut participer à
+'  plusieurs tournois et dans un tournoi il y a MaxnumberPlayer de joueur
+Chess_Tournament "0.." -- "MaxNumberPlayer"  Player 
+
+' ------------------------------------------------------------------------------------
+'compostion
+
+' Un tournoi contient des parties, une partie appartient à un tournoi 
+' Une partie ne peut exister sans tournoi
+' il y a 0.. game par tournoi
+Chess_Tournament "1" *-- "0.." ChessGame 
+
+
+'-------------------------------------------------------------------------------------
+'Dependance
+' Le service ELO agit sur des parties et met à jour les joueurs
+' elle depend de Player et de Game donc c est une dependance
+EloService .up.> Game
+EloService .up.> Player
 
 
 
-'Definition of the person class
-abstract class  Person {
-    # First name : string
-    # Last name : string 
-    # Date of birth : string
+Player -[hidden]right- ChessGame
+Player -[hidden]up- Tournament
 
-}
+GameResult -[hidden]left- EloService
+GameResult -[hidden]up- ChessColor
 
-
-'Definition of the player class
-class Player {  
-    + Elo : int
-    + Player_id : string
-
-    + change_elo() : void
-}
-
-
-'Definition the the Backup class
-class Backup {
-    SavePlayer() : void
-    SaveCompetition() : void
-}
-
-
-
-'Definition the the Elo calculator class
-Class Elo_calculator {
-
-    - Player : Player
-    - GameState : Bool
-
-}
-
-
-
-
-'Definition the the Game class
-Class Game {
-    - Turn : Bool
-    - Player1_ID : int
-    - Player2_ID : int
-    - Moves : List<string>
-    - Winner : int | null
-
-    + SetMove (Move:string) : void
-    + RemoveLastMove() : void
-
-}
-
-
-
-'Definition the the Competition class
-Class Competition{
-    - Name : string
-    - Location : string
-    - Date : string
-    - GameList : List<Game>
-    - PlayerList : Dictionary<Player, int>
-
-
-    - AddPlayer(Player : Player)
-
-
-
-}
-
-'Definition the the History package
-package "History"  #746f6fdd {
-
-    
-    package "Players" as Playerfolder #cdcbcbdd{
-
-    json "Player Data" as PlayerData #eeebebdd{
-        "First Name" : "",
-        "Last Name": "",
-        "Player id": "" ,
-        "Date of Birth" :"" ,
-        "Registration date" :"" ,
-        "elo" : "",
-        "Previous Games" : "" 
-
-    }
-
-
-'HERE IS A RELATIONNNNN-----------------------------------------
-    Backup::SavePlayer --> PlayerData
-
-    }
-
-    package "Competitions" as CompetitionFolder #cdcbcbdd {
-
-        artifact "Ranking.txt" <<Ranking>> #eeebebdd{
-
-        }
-        package Games as Gamefolder #eeebebdd {
-        json "Game Data" as Gamedata  {
-            "Player 1" : "",
-            "Player 2" : "",
-            "Winner" : "",
-            "Moves" : ""
-        }
-        }
-        
-        
-    }
-
-
-'HERE IS A RELATIONNNNN-----------------------------------------
-
-    Backup::SaveCompetition --> CompetitionFolder
-}
-
-/'
-person
-player
-Admin 
-compet 
-match
-'/
 @enduml

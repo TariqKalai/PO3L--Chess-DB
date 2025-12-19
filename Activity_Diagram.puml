@@ -1,0 +1,51 @@
+@startuml Activity_ManageRegistration
+
+title Diagramme d'Activité — Gestion des inscriptions (ManageRegistrationViewModel)
+
+start
+
+:Afficher liste des tournois;
+
+if (Tournoi sélectionné ?) then (oui)
+  :Charger inscriptions existantes\nLoadRegistration(SelectedTournament);
+  :Naviguer vers ManageRegistrationPage;
+
+  repeat
+    :Afficher joueurs inscrits\n+ actions possibles;
+
+    if (Action = Ajouter joueur ?) then (oui)
+      if (Tournoi complet ?) then (oui)
+        :Refuser ajout\n(CanAddPlayers = false)\n Bouton grisé;
+      else (non)
+        :Calculer Remaining_players (Playerlist - List_player);
+        :Naviguer vers ChoosePlayers;
+        if (Joueur choisi ?) then (oui)
+          :Ajouter SelectedPlayers à List_player;
+          :Sauvegarder inscriptions\nModifyRegistration(tournament, List_player);
+          :Retour ManageRegistrationPage;
+        else (non)
+          :Aucune action/ quitter;
+        endif
+      endif
+
+    else (non)
+      if (Action = Supprimer joueur ?) then (oui)
+        if (SelectedPlayer null ?) then (oui)
+          :Impossible\n(CanDeletePlayer = false)\nBouton grisé; 
+        else (non)
+          :Retirer SelectedPlayer de List_player;
+          :Sauvegarder inscriptions\nModifyRegistration(tournament, List_player);
+        endif
+      else (non)
+        :Aucune action / Quitter page;
+      endif
+    endif
+
+  repeat while (Continuer gestion ?) is (oui)
+
+else (non)
+  :Rien à faire (boutons désactivés);
+endif
+
+stop
+@enduml

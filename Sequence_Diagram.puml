@@ -1,0 +1,51 @@
+@startuml Sequence_EncodeGame_ApplyElo
+
+title Diagramme de Séquence — Encoder une partie, appliquer l’ELO, sauvegarder \n(AddGameViewModel)
+
+actor Admin
+
+boundary "AddGameViewModel" as VM
+entity "Chess_Tournament" as T
+entity "ChessGame" as G
+control "EloService" as Elo
+control "GameFileService" as GFS
+control "FileService" as FS
+entity "Player (P1)" as P1
+entity "Player (P2)" as P2
+
+Admin -> VM : Encoder une partie\n(P1, P2, result, moves, color)
+activate VM
+
+VM -> G : new ChessGame(...)
+activate G
+G --> VM : game instance
+deactivate G
+
+VM -> GFS : Savegame(G,T)
+activate GFS
+GFS --> VM : ok
+deactivate GFS
+
+VM -> Elo : Apply(G)
+activate Elo
+Elo -> G : get Result (win,lose,draw)
+Elo -> P1 : read Elo
+Elo -> P2 : read Elo
+
+alt Player1Win / Player2Win / Draw
+  Elo -> P1 : update Elo
+  Elo -> P2 : update Elo
+end
+Elo --> VM : updated players
+deactivate Elo
+
+VM -> FS : SavePlayers(allPlayers)
+activate FS
+FS --> VM : ok
+deactivate FS
+
+
+VM --> Admin : Confirmation (sauvegarder + elo MAJ)
+deactivate VM
+
+@enduml
