@@ -69,9 +69,15 @@
 
     <TextBlock Text="Moves (1 per line)" Grid.Row="11" Grid.Column="1"/>
     <TextBox Grid.Row="11" Grid.Column="2"
-             Text="{Binding MovesText, Mode=TwoWay}"
-             AcceptsReturn="True"
-             MinHeight="120"/>
+         Text="{Binding MovesText, Mode=TwoWay}"
+         AcceptsReturn="True"
+         MinHeight="120"
+         MaxHeight="200"
+         TextWrapping="Wrap"
+         ScrollViewer.VerticalScrollBarVisibility="Auto"
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+
+
 
     <Button Content="Submit"
             Grid.Row="11" Grid.Column="3"
