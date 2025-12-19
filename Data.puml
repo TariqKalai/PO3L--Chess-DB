@@ -1,0 +1,18 @@
+@startuml Data
+' Definition the History package
+package "Data" #746f6fdd {
+
+  package "Tournaments" as TournamentsFolder #cdcbcbdd {
+
+    package "[Id - TournamentName]" as SingleTournament #eeebebdd {
+      json "[Match_id-Player1-Player2].json" as MatchJson {}
+      json "Tournament_players.json" as TournamentPlayers{}
+    }
+
+
+  }
+
+    json "Players.json" as Player #cdcbcbdd{}
+    json "tournaments.json" as tournament #cdcbcbdd{}
+}
+@enduml

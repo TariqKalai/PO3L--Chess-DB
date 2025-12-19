@@ -1,5 +1,9 @@
 # PO3L--Chess-DB
 
+## Auteur
+
+Kalaï Tariq [23047]
+
 ## Introduction
 
 Dans le cadre du projet Chess DB, nous devions développer une application de gestion pour une fédération d’échecs afin de faciliter la gestion administrative des joueurs, des compétitions et des parties jouées
@@ -14,7 +18,25 @@ L’application permet de
   les parties avec leurs coups et leurs résultats
 - calculer automatiquement le classement ELO
 
-## Fonctionnalité supplementaire
+## Fonctionnalité
+
+Voici les differentes fonctionnalité presentes dans le projet:
+
+Page Home:
+
+- Creer un joueur
+- Editer Supprimer un joueur
+
+Page Tournoi:
+
+- Creer un tournoi
+- Editer/supprimer un tournoi
+- Gerer les enregistrement dans des tournoi
+- Gerer les matchs dans des tournoi
+
+La sauvegarde des données de façon persistante se fait via des fichier Json qui sont Load/Creer,... Ils se trouvent dans le Dossier "Data" qui se trouve dans la "Basedirectory", si le projet n'est pas compilé ils sont dans "/bin/net[x]/"
+
+### Fonctionnalité supplementaire
 
 2 "fonctionnalité" supplémentaire ont été choisies :
 
@@ -76,3 +98,10 @@ Le principe Open/Closed est appliqué grâce à l’utilisation de classes abstr
 Cette approche permet d’ajouter facilement de nouveaux types de jeux ou de compétitions en créant de nouvelles classes spécialisées, tout en conservant la structure générale de l’application.
 
 ## Conclusion
+
+Ce projet fait en AValoniaUI MVVM nous a permis de développer une application fonctionnelle pour la gestion d’une fédération d’échecs, intégrant la gestion des joueurs, des compétitions, l’encodage des parties et le calcul du score ELO. La structure du projet et l’utilisation de principes de conception clairs rendent l’application lisible et adaptable.
+
+Des améliorations restent possibles, notamment en rendant l’interface plus fluide, par exemple en utilisant des fenêtres contextuelles pour certaines créations plutôt que de changer de page (J'ai appris l'existence des fenetre contextuelles sur Avalonia trop tard...
+). L’ajout de nouvelles statistiques ou l’évolution du système de sauvegarde vers une base de données pourraient également être envisagés.
+
+Dans l’ensemble, le projet répond aux objectifs fixés et constitue une base solide pour de futures évolutions.
