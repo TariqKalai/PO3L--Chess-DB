@@ -36,6 +36,12 @@ Page Tournoi:
 
 La sauvegarde des données de façon persistante se fait via des fichier Json qui sont Load/Creer,... Ils se trouvent dans le Dossier "Data" qui se trouve dans la "Basedirectory", si le projet n'est pas compilé ils sont dans "/bin/net[x]/"
 
+![Data](/Images/Data.svg)
+
+<p align="center">
+  Figure 1 – Stockage Donnés
+  </p>
+
 ### Fonctionnalité supplementaire
 
 2 "fonctionnalité" supplémentaire ont été choisies :
@@ -45,14 +51,14 @@ La sauvegarde des données de façon persistante se fait via des fichier Json qu
   ![Ranking](/Images/Ranking.png)
 
   <p align="center">
-  Figure 1 – Home
+  Figure 2 – Home
   </p>
 
 - Une page <b>Home</b> qui permet de voir certaines statistiques globales (nombre de joueurs, elo Moyen, tournois actifs). Elle propose egalement des <b>quick actions</b> permettant d’accéder facilement aux fonctionnalités les plus utilisées (ajout d’un joueur, création d’une compétition, enregistrement d'un joueur).
 
   ![Home](/Images/Home.png)
   <p align="center">
-  Figure 2 – Ranking
+  Figure 3 – Ranking
   </p>
 
 ## Diagrammes
